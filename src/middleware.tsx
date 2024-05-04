@@ -3,9 +3,8 @@ import Negotiator from "negotiator";
 import { NextRequest, NextResponse } from "next/server";
 
 const supportedLanguages: any = {
-  en: "en-US", // English
-  es: "es-ES", // Spanish
-  // Add more languages here...
+  en: "en-US",
+  es: "es-ES",
 };
 
 let headers = { "accept-language": "nl-NL,nl;q=0.5" }; // Example request headers
