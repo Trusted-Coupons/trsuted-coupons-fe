@@ -1,45 +1,42 @@
-import Image from "next/image";
-import React from "react";
-import placeholderImg from "../../public/images/promo_placeholder_01.png";
+import Image, { StaticImageData } from 'next/image';
+import React from 'react';
 
-type CategorieProps = {
-  categorieImg: string;
+import placeholderImg from '../../public/images/placeholder_store_01.jpeg';
+
+type CategoryProps = {
+  categorieImg: StaticImageData;
   categorieName: string;
 };
 
-const categories: CategorieProps[] = [
+const categories: CategoryProps[] = [
   {
-    categorieImg: "/images/placeholder_store_01.jpeg",
-    categorieName: "Business",
+    categorieImg: placeholderImg,
+    categorieName: 'Business'
   },
   {
-    categorieImg: "/images/placeholder_store_01.jpeg",
-    categorieName: "Tech",
+    categorieImg: placeholderImg,
+    categorieName: 'Tech'
   },
   {
-    categorieImg: "/images/placeholder_store_01.jpeg",
-    categorieName: "LifeStyle",
-  },
+    categorieImg: placeholderImg,
+    categorieName: 'LifeStyle'
+  }
 ];
 
 const PopularCategories = () => {
   return (
-    <div className="flex gap-2">
-      {categories.map((categorie: CategorieProps, index) => {
-        return (
-          <div key={index} className="flex flex-col gap-2 relative">
-            <Image
-              src={placeholderImg}
-              width={360}
-              height={242}
-              alt="categorie"
-            />
-            <div className="flex absolute w-full h-1/3 bg-[#383838] bottom-0 text-white text-[21px] justify-center items-center">
-              Shop for {categorie.categorieName}
+    <div className="flex flex-col gap-4 border-2 border-gray-300 rounded-3xl p-12">
+      <h3 className="text-3xl pb-10">Popular Categories</h3>
+      <div className="flex gap-4">
+        {categories.map((category: CategoryProps, index) => {
+          return (
+            <div key={index} className="flex flex-1 gap-2 border-2 py-1 px-4 rounded-full">
+              <Image src={category.categorieImg} width={16} height={16} alt="coupon card" />
+              <span>{category.categorieName}</span>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
