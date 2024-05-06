@@ -1,6 +1,6 @@
-'use client';
 import React from 'react';
-import placeholder from '../../public/images/coupon_placeholder_01.jpg';
+import moment from 'moment';
+
 import Image from 'next/image';
 
 type CouponCardProps = {
@@ -21,9 +21,9 @@ const CouponCard = ({
   setIsOpen
 }: CouponCardProps) => {
   return (
-    <div className="flex p-12 w-full gap-5 border-2 border-gray-300 rounded-3xl">
+    <div className="flex p-12 w-full gap-5 border-1 border-gray rounded-3xl">
       <div className="p-5">
-        <Image src={placeholder} width={200} height={40} alt="coupon card" />
+        <Image src={couponImageUrl} width={200} height={40} alt="coupon card" />
       </div>
       <div className="flex flex-col gap-y-5">
         <h3 className="h3 text-2xl font-medium">{title}</h3>
@@ -33,9 +33,9 @@ const CouponCard = ({
             className="h-fit pr-4 flex items-center font-medium bg-gray-300 rounded-full text-nowrap"
             onClick={() => setIsOpen(true)}>
             <span className="bg-primary py-2 px-4 rounded-full text-white">SHOW CODE</span>
-            {code}
+            {code.slice(code.length - 3)}
           </button>
-          <span className="text-gray-300">Expire: {expireDate}</span>
+          <span className="text-gray-300">Expire: {moment(expireDate).format('DD/MM/YYYY')}</span>
         </div>
       </div>
     </div>

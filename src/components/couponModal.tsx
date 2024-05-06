@@ -1,45 +1,67 @@
-import React from "react";
-import Modal from "react-modal";
+import React, { useState, Fragment, FC } from 'react';
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
+import { Dialog, Transition } from '@headlessui/react';
 
-const CouponModal = ({ modalIsOpen, closeModal }: any) => {
-  let subtitle;
+interface CouponModalProps {
+  title: string;
+  description: string;
+  code: string;
+  valid: string;
+  modalIsOpen: number;
+  closeModal: () => void;
+}
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-  }
-
+const CouponModal: FC<CouponModalProps> = ({
+  title,
+  description,
+  code,
+  valid,
+  modalIsOpen,
+  closeModal
+}) => {
   return (
-    <div>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <h2>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
-      </Modal>
-    </div>
+    <Transition appear show={Boolean(modalIsOpen)} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0">
+          <div className="fixed inset-0 bg-secondary/40" />
+        </Transition.Child>
+
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                  {title}
+                </Dialog.Title>
+                <div className="mt-2">
+                  <p className="text-sm text-gray-500">{description}</p>
+                </div>
+                <div className="mt-2">
+                  <p className="text-sm text-gray-500">{code}</p>
+                </div>
+                <div className="mt-2">
+                  <p className="text-sm text-gray-500">{valid}</p>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </div>
+      </Dialog>
+    </Transition>
   );
 };
 

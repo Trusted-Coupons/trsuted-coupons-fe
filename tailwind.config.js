@@ -10,8 +10,23 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        'infinite-scroll': 'infinite-scroll 25s linear infinite'
+      },
+      borderWidth: {
+        1: '1px'
+      },
       colors: {
-        primary: '#FF5C00'
+        primary: '#FF5C00',
+        secondary: '#292929',
+        tertiary: '#222222',
+        gray: '#DEDEDE'
+      },
+      keyframes: {
+        'infinite-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' }
+        }
       }
     }
   },

@@ -13,3 +13,8 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
+
+@layer utilities {
+  .clip-coupon {
+    clip-path: polygon(0 0, 0% 20%, 15% 50%, 0% 80%, 0 100%, 52% 100%, 100% 100%, 100% 80%, 85% 50%, 100% 20%, 100% 0, 51% 0);  }
+}
