@@ -41,7 +41,7 @@ const faqs = [
 
 const Footer: FC<FooterProps> = ({ alpha }) => {
   return (
-    <footer className="flex flex-col gap-y-20 bg-secondary text-white pt-24">
+    <footer className="mt-20 flex flex-col gap-y-20 bg-secondary text-white pt-24">
       <div className="w-full flex gap-32 max-w-[1280px] mr-auto ml-auto">
         <div className="flex-1">
           <h5 className="font-medium text-xl mb-6">Email Newsletter</h5>

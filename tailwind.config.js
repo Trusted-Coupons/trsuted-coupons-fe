@@ -20,7 +20,8 @@ module.exports = {
         primary: '#FF5C00',
         secondary: '#292929',
         tertiary: '#222222',
-        gray: '#DEDEDE'
+        gray: '#DEDEDE',
+        'light-gray': '#FAFAFA'
       },
       keyframes: {
         'infinite-scroll': {

@@ -2,6 +2,7 @@ import Layout from '@/components/layout';
 import { PopularStores, Coupons, PopularCategories } from '@/components/UI';
 
 import luckyGirlImg from '../../../../../public/images/excited-girl.png';
+import { Store } from '@/types/api.types';
 
 export interface Category {
   id: number;
@@ -10,18 +11,23 @@ export interface Category {
 
 export default async function CategoryPage(props: any) {
   try {
-    const category = await getCategory(props.params.lang, props.params.category);
+    const { stores, coupons, bestCoupons, bestStores, popularCategories } =
+      await getServerSideProps(props.params.lang);
 
     return (
       <Layout
         alpha={props.params.lang}
         jumbotronSrc={luckyGirlImg}
         kicker="Category"
-        title={<span className="text-primary">{category.name}</span>}
+        title={<span className="text-primary">Beauty</span>}
         subtitle="Get your Coupon today and save yourself up to 50% of your money">
-        <PopularStores />
-        <Coupons coupons={[]} />
-        <PopularCategories />
+        <Coupons
+          withoutHeader={true}
+          coupons={coupons}
+          bestCoupons={bestCoupons}
+          bestStores={bestStores}
+        />
+        <PopularCategories categories={popularCategories} />
       </Layout>
     );
   } catch (error) {
@@ -29,18 +35,28 @@ export default async function CategoryPage(props: any) {
   }
 }
 
-async function getCategory(lang: string, category: string) {
-  return { id: 'dsads', name: 'string' };
+async function getServerSideProps(lang: string) {
+  const requests = [
+    '/stores?page=1&perPage=50',
+    '/coupons?page=1&perPage=10',
+    '/coupons?page=1&perPage=5',
+    '/stores?page=1&perPage=15',
+    '/coupons?page=1&perPage=30'
+  ];
 
-  const res = await fetch(`${process.env.API_URL}/${lang}/categories/${category}`, {
-    cache: 'no-cache'
-  });
+  const apis = await Promise.all(
+    requests.map((url) =>
+      fetch(`${process.env.API_URL}/${lang}${url}`, {
+        cache: 'no-cache'
+      })
+    )
+  ).then(async (res) => Promise.all(res.map(async (data) => await data.json())));
 
-  const coupons: Category = await res.json();
-
-  if (!res.ok) {
-    throw new Error('Cannot fetch repositories');
-  }
-
-  return coupons;
+  return {
+    stores: apis[0] as Store[],
+    coupons: apis[1],
+    bestCoupons: apis[2],
+    bestStores: apis[3] as Store[],
+    popularCategories: apis[4]
+  };
 }

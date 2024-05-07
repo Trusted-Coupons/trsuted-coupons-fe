@@ -1,40 +1,18 @@
+import { Store } from '@/types/api.types';
+
+import Image from 'next/image';
+import Link from 'next/link';
 import Layout from '@/components/layout';
-import { PopularStores, Coupons, PopularCategories, Store } from '@/components/UI';
+import { Coupons, PopularCategories, CouponList } from '@/components/UI';
 
 import luckyGirlImg from '../../../../../public/images/lucky-girl.png';
 
-export interface Coupon {
-  id: number;
-  offer_id: number;
-  title: string;
-  description: string;
-  label: string;
-  code: string;
-  featured: boolean;
-  source: string;
-  deeplink: string;
-  affiliate_link: string;
-  cashback_link: string;
-  url: string;
-  image_url: string;
-  brand_logo: string;
-  type: 'Code';
-  store: string;
-  merchant_home_page: string;
-  categories: string;
-  standard_categories: string;
-  start_date: string;
-  end_date: string;
-  status: string;
-  primary_location: string;
-  rating: null;
-  table_name: string;
-}
-
 export default async function StorePage(props: any) {
   try {
-    const { stores, coupons, bestCoupons, bestStores, popularCategories } =
-      await getServerSideProps(props.params.lang);
+    const { store, coupons, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
+      props.params.lang,
+      props.params.id
+    );
 
     return (
       <Layout
@@ -48,8 +26,21 @@ export default async function StorePage(props: any) {
           </>
         }
         subtitle="Get your Coupon today and save yourself up to 50% of your money">
-        <Store />
-        <Coupons coupons={coupons} bestCoupons={bestCoupons} bestStores={bestStores} />
+        <div className="flex flex-col items-center justify-center border-1 border-gray rounded-3xl p-8">
+          <Image
+            className="h-36 w-36"
+            height={200}
+            width={200}
+            src={store.icon}
+            alt={store.store}
+          />
+          <h3>{store.store}</h3>
+          <Link href="/">https:///dsasd.acom</Link>
+          <p>sdadsaadsdasads sad asdas dasd as</p>
+        </div>
+        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
+          <CouponList coupons={coupons} />
+        </Coupons>
         <PopularCategories categories={popularCategories} />
       </Layout>
     );
@@ -58,12 +49,11 @@ export default async function StorePage(props: any) {
   }
 }
 
-async function getServerSideProps(lang: string) {
+async function getServerSideProps(lang: string, storeId: string) {
   const requests = [
-    '/coupons?page=1&perPage=50',
-    '/coupons?page=1&perPage=10',
+    `/store/${storeId}}`,
     '/coupons?page=1&perPage=5',
-    '/coupons?page=1&perPage=5',
+    '/stores?page=1&perPage=15',
     '/coupons?page=1&perPage=30'
   ];
 
@@ -76,10 +66,10 @@ async function getServerSideProps(lang: string) {
   ).then(async (res) => Promise.all(res.map(async (data) => await data.json())));
 
   return {
-    stores: apis[0],
+    store: apis[0] as Store,
     coupons: apis[1],
     bestCoupons: apis[2],
-    bestStores: apis[3],
+    bestStores: apis[3] as Store[],
     popularCategories: apis[4]
   };
 }

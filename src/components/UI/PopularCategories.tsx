@@ -1,29 +1,8 @@
-import Image, { StaticImageData } from 'next/image';
-import React, { FC } from 'react';
+import { FC } from 'react';
+import type { Coupon } from '@/types/api.types';
 
-import placeholderImg from '../../../public/images/placeholder_store_01.jpeg';
+import Image from 'next/image';
 import checkImg from '../../../public/images/check.png';
-import { Coupon } from '@/app/[lang]/page';
-
-type CategoryProps = {
-  categorieImg: StaticImageData;
-  categorieName: string;
-};
-
-const categories: CategoryProps[] = [
-  {
-    categorieImg: placeholderImg,
-    categorieName: 'Business'
-  },
-  {
-    categorieImg: placeholderImg,
-    categorieName: 'Tech'
-  },
-  {
-    categorieImg: placeholderImg,
-    categorieName: 'LifeStyle'
-  }
-];
 
 interface PopularCategoriesProps {
   categories: Coupon[];
