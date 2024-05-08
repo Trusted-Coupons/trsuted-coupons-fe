@@ -44,11 +44,11 @@ const Stores: FC<CouponsProps> = () => {
             {stores.map((store) => (
               <div
                 key={store.id}
-                className="flex bg-light-gray p-2 text-sm gap-x-4 hover:cursor-pointer"
+                className="flex bg-light-gray p-4 text-sm gap-x-4 hover:cursor-pointer"
                 onClick={() => router.push(`/${params.lang}/stores/${store.id}`)}>
                 <Image src={tagImage} alt="image" />
                 <span className="mr-auto">{store.title}</span>
-                <span>({store.stores} coupons)</span>
+                <span className="text-black opacity-60">({store.stores} coupons)</span>
               </div>
             ))}
           </div>
@@ -77,9 +77,12 @@ const Stores: FC<CouponsProps> = () => {
 
   return (
     <div className="flex flex-col border-1 border-gray rounded-3xl">
-      <div className="flex gap-x-6 ml-auto mr-auto opacity-60 px-8 pt-4">
+      <div className="flex flex-wrap gap-x-6 ml-auto mr-auto opacity-60 px-8 pt-4">
         {alphabet.map((char) => (
-          <span key={char} className="hover:cursor-pointer" onClick={() => setSelectedChar(char)}>
+          <span
+            key={char}
+            className="hover:cursor-pointer pb-4"
+            onClick={() => setSelectedChar(char)}>
             {char}
           </span>
         ))}

@@ -10,9 +10,11 @@ interface PopularCategoriesProps {
 
 const PopularCategories: FC<PopularCategoriesProps> = ({ categories }) => {
   return (
-    <div className="flex flex-col gap-4 border-1 border-gray rounded-3xl p-12">
-      <h3 className="text-2xl pb-8 text-primary font-medium">Popular Categories</h3>
-      <div className="grid grid-cols-4 text-sm gap-4">
+    <div className="flex flex-col gap-4 border-1 border-gray rounded-3xl p-6 lg:p-8">
+      <h3 className="text-lg pb-6 text-primary font-medium md:text-xl lg:text-2xl">
+        Popular Categories
+      </h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 text-xs lg:text-sm gap-4">
         {categories.map(({ id, title, brand_logo }) => {
           return (
             <div

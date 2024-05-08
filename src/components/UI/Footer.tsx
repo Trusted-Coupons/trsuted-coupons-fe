@@ -41,33 +41,44 @@ const faqs = [
 
 const Footer: FC<FooterProps> = ({ alpha }) => {
   return (
-    <footer className="mt-20 flex flex-col gap-y-20 bg-secondary text-white pt-24">
-      <div className="w-full flex gap-32 max-w-[1280px] mr-auto ml-auto">
-        <div className="flex-1">
-          <h5 className="font-medium text-xl mb-6">Email Newsletter</h5>
-          <p className="max-w-80 opacity-60">
+    <footer className="mt-20 flex flex-col gap-y-20 bg-secondary text-white pt-10 lg:pt-24">
+      <div className="w-full flex flex-col lg:flex-row gap-10 lg:gap-32 max-w-[1280px] p-4 mr-auto ml-auto">
+        <div className="flex flex-1 flex-col">
+          <h5 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Email Newsletter</h5>
+          <p className="max-w-80 opacity-60 text-sm lg:text-base pb-6">
             Your email is safe with us and we hate spam as much as you do. Lorem ipsum dolor sit
             amet et dolore.
           </p>
+          <input
+            className="bg-black p-2 px-6 text-sm outline-none mb-4 opacity-30"
+            placeholder="Enter your name..."
+          />
+          <input
+            className="bg-black py-2 px-6 text-sm outline-none mb-4 opacity-30"
+            placeholder="Enter your email..."
+          />
+          <button className="bg-primary w-fit py-2 text-white text-sm px-8">Subscribe</button>
         </div>
         <div className="flex-1">
-          <h5 className="font-medium text-xl mb-6">Company Info</h5>
+          <h5 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Company Info</h5>
           <ul className="flex flex-col gap-y-4 opacity-60">
             {routes(alpha).map(({ label, href }) => (
-              <li key={label} className="border-b-1 pb-2">
+              <li key={label} className="border-b-1 pb-2 text-sm lg:text-base">
                 <Link href={href}>{label}</Link>
               </li>
             ))}
           </ul>
         </div>
         <div className="max-w-96">
-          <h5 className="font-medium text-xl mb-6">Frequently Asked Questions?</h5>
+          <h5 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">
+            Frequently Asked Questions?
+          </h5>
           <div className="flex flex-col gap-y-3">
             {faqs.map(({ question, answer }) => (
               <Disclosure key={question} as="div" className="-mx-3 opacity-60">
                 {({ open }) => (
                   <>
-                    <Disclosure.Button className="flex w-96 items-center justify-between py-2 pl-3 pr-3.5 text-base leading-7 text-white bg-tertiary">
+                    <Disclosure.Button className="flex w-96 items-center justify-between py-2 pl-3 pr-3.5 text-sm lg:text-base leading-7 text-white bg-tertiary">
                       <span>{question}</span>
                       <ChevronUpIcon
                         className={`${open ? 'rotate-180 transform' : ''} h-5 w-5 text-white`}

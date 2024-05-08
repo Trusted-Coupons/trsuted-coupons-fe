@@ -22,10 +22,10 @@ const Header: FC<PropsWithChildren<HeaderProps>> = ({ children, alpha, jumbotron
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="relative">
+    <header className={`relative ${!jumbotronSrc && 'mb-16 lg:mb-24'}`}>
       {jumbotronSrc && <Image className="w-full" src={jumbotronSrc} alt="Jumbotron" />}
       {children}
-      <div className={`absolute w-full top-0 ${!jumbotronSrc && 'border-b-1'}`}>
+      <div className={`absolute w-full top-0 ${!jumbotronSrc && 'border-b-1 border-gray'}`}>
         <nav
           className="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8"
           aria-label="Global">

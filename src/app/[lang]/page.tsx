@@ -1,14 +1,20 @@
-import Layout from '@/components/layout';
-import { PopularStores, Coupons, PopularCategories } from '@/components/UI';
+import type { Metadata } from 'next';
+import type { Store } from '@/types/api.types';
 
+import Layout from '@/components/layout';
+import { PopularStores, Coupons, PopularCategories, CouponList } from '@/components/UI';
 import luckyGirlImg from '../../../public/images/lucky-girl.png';
-import { Store } from '@/types/api.types';
-import CouponList from '@/components/UI/CouponList';
+
+export const metadata: Metadata = {
+  title: 'Trusted Coupons',
+  description: 'Lorem Ipsum is Lorem Ipsum',
+  keywords: 'Trusted, Coupons'
+};
 
 export default async function HomePage(props: any) {
   try {
     const { stores, coupons, bestCoupons, bestStores, popularCategories } =
-      await getServerSideProps(props.params.lang);
+      await getServerSideProps(props.searchParams.page, props.params.lang);
 
     return (
       <Layout
@@ -34,9 +40,9 @@ export default async function HomePage(props: any) {
   }
 }
 
-async function getServerSideProps(lang: string) {
+async function getServerSideProps(page = 1, lang: string) {
   const requests = [
-    '/stores?page=1&perPage=50',
+    `/stores?page=${page}&perPage=50`,
     '/coupons?page=1&perPage=10',
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',

@@ -29,10 +29,10 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
   }
 
   return (
-    <div className={`flex flex-col ${withoutHeader && 'pt-20'}`}>
+    <div className={`flex flex-col ${withoutHeader && 'pt-0 lg:pt-12'}`}>
       {!withoutHeader && (
         <div className="flex flex-col">
-          <div className="flex flex-col gap-y-1 text-black max-w-7xl py-12 lg:gap-y-3">
+          <div className="flex flex-col gap-y-1 mb-6 text-black max-w-7xl py-4 lg:mb-0 lg:py-12 lg:gap-y-3">
             <h4 className="uppercase text-xs font-medium md:text-base">
               Saving your money since 2024
             </h4>
@@ -45,11 +45,11 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
           </div>
         </div>
       )}
-      <div className="flex gap-x-14">
+      <div className="flex flex-col md:flex-row gap-x-6 gap-y-6">
         {children}
-        <div className="flex-col hidden md:flex max-w-[25rem] gap-y-10">
-          <div className="border-1 border-gray rounded-3xl p-8">
-            <h3 className="text-2xl pb-6 font-medium">Best Coupons</h3>
+        <div className="w-full flex-col md:flex md:max-w-[20rem] lg:max-w-[25rem] lg:gap-y-6">
+          <div className="border-1 mb-8 border-gray rounded-3xl p-6 lg:p-8 lg:mb-0">
+            <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Best Coupons</h3>
             {bestCoupons.map(({ id, title, brand_logo, label, description, code, end_date }) => (
               <div
                 key={id}
@@ -68,12 +68,12 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
                     closeModal={closeModal}
                   />
                 )}
-                <span className="text-sm">{title}</span>
+                <span className="text-xs lg:text-sm">{title}</span>
               </div>
             ))}
           </div>
-          <div className="border-1 border-gray rounded-3xl p-8">
-            <h3 className="text-2xl pb-6 font-medium">Best Stores</h3>
+          <div className="border-1 border-gray rounded-3xl p-6 lg:p-8 mb-8 lg:mb-0">
+            <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Best Stores</h3>
             <div className="grid grid-cols-5 gap-3 mb-1 border-1 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer">
               {bestStores.map(({ id, icon }) => (
                 <Image
@@ -87,12 +87,21 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
               ))}
             </div>
           </div>
-          <div className="border-1 border-gray rounded-3xl p-8">
-            <h3 className="text-2xl pb-8 font-mediumy">Email Newsletter</h3>
-            <p className="font-light text-sm opacity-60">
+          <div className="flex flex-col border-1 border-gray rounded-3xl p-6 lg:p-8">
+            <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Email Newsletter</h3>
+            <p className="font-light text-xs lg:text-sm opacity-60 mb-6">
               Your email is safe with us and we hate spam as much as you do. Lorem ipsum dolor sit
               amet et dolore.
             </p>
+            <input
+              className="bg-gray rounded-full p-2 px-6 text-sm outline-none mb-4 opacity-60"
+              placeholder="Enter your name..."
+            />
+            <input
+              className="bg-gray rounded-full py-2 px-6 text-sm outline-none mb-4 opacity-60"
+              placeholder="Enter your email..."
+            />
+            <button className="bg-primary rounded-full py-2 text-white text-sm">Subscribe</button>
           </div>
         </div>
       </div>

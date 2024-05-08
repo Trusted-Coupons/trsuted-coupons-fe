@@ -1,19 +1,18 @@
 import type { Metadata } from 'next';
+import type { Store } from '@/types/api.types';
 
 import Layout from '@/components/layout';
 import { Stores, Coupons, PopularCategories } from '@/components/UI';
-import type { Store } from '@/types/api.types';
 
-import luckyGirlImg from '../../../../public/images/confident-girl.png';
+import luckyGirlImg from '../../../../public/images/excited-girl.png';
 
 export const metadata: Metadata = {
-  title: 'Alphabetical Store List',
-  description:
-    'In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.',
+  title: 'Trusted Coupons',
+  description: 'Lorem Ipsum is Lorem Ipsum',
   keywords: 'Trusted, Coupons'
 };
 
-export default async function StoresPage(props: any) {
+export default async function CategoriesPage(props: any) {
   try {
     const { stores, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
       props.params.lang
@@ -24,7 +23,7 @@ export default async function StoresPage(props: any) {
         alpha={props.params.lang}
         jumbotronSrc={luckyGirlImg}
         kicker="Saving your money since 2024"
-        title="Alphabetical Store List"
+        title="Alphabetical Category List"
         subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.">
         <Coupons bestCoupons={bestCoupons} bestStores={bestStores}>
           <Stores stores={stores} />

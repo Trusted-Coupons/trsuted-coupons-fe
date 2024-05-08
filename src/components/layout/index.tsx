@@ -25,7 +25,7 @@ const Layout: FC<PropsWithChildren<LayouProps>> = ({
       <Header alpha={alpha} jumbotronSrc={jumbotronSrc}>
         {jumbotronSrc && <Jumbotron kicker={kicker} title={title} subtitle={subtitle} />}
       </Header>
-      <div className="flex flex-col gap-y-10 max-w-[1280px] mr-auto ml-auto">{children}</div>
+      <div className="flex flex-col gap-y-10 max-w-[1280px] mr-auto ml-auto p-4">{children}</div>
       <Footer alpha={alpha} />
     </>
   );

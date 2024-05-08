@@ -52,28 +52,28 @@ const CouponModal: FC<CouponModalProps> = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-10 text-left align-middle shadow-xl transition-all">
-                <div className="flex items-center justify-between px-3 pb-8">
+                <div className="flex items-center justify-between gap-x-3 px-3 pb-8">
                   <Image className="w-20" width={100} height={50} src={logo} alt={title} />
-                  <span className="text-sm uppercase font-semibold">{label}</span>
+                  <span className="text-xs lg:text-sm uppercase font-semibold">{label}</span>
                 </div>
-                <Dialog.Title as="h3" className="text-lg font-medium leading-6">
+                <Dialog.Title as="h3" className="text-base lg:text-lg font-medium leading-6">
                   {title}
                 </Dialog.Title>
                 <div className="mt-6">
-                  <p className="base font-light">{description}</p>
+                  <p className="text-sm lg:text-base font-light">{description}</p>
                 </div>
                 <div className="mt-6 flex flex-col">
                   <span
-                    className={`p-4 text-center border-dashed border-1 text-primary ${copyValue && 'bg-gray text-white'} hover:cursor-pointer`}
+                    className={`p-4 text-center text-sm lg:text-base border-dashed border-1 text-primary ${copyValue && 'bg-gray text-white'} hover:cursor-pointer`}
                     onClick={() => handleCopy(code)}>
                     {code}
                   </span>
-                  <span className="pt-3 text-sm font-light text-center opacity-60">
+                  <span className="pt-3 text-xs lg:text-sm font-light text-center opacity-60">
                     Click to Copy
                   </span>
                 </div>
                 <div className="mt-8 flex justify-center">
-                  <span className="text-sm font-light opacity-60">
+                  <span className="text-xs lg:text-sm font-light opacity-60">
                     Valid until {moment(valid).format('DD MMM YYYY')}
                   </span>
                 </div>

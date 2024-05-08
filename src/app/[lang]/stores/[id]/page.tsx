@@ -1,15 +1,13 @@
-import { Store } from '@/types/api.types';
+import type { Metadata } from 'next';
+import type { Store } from '@/types/api.types';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import Layout from '@/components/layout';
 import { Coupons, PopularCategories, CouponList } from '@/components/UI';
 
-import luckyGirlImg from '../../../../../public/images/lucky-girl.png';
-
 export default async function StorePage(props: any) {
   try {
-    const { store, coupons, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
+    const { store, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
       props.params.lang,
       props.params.id
     );
@@ -17,7 +15,6 @@ export default async function StorePage(props: any) {
     return (
       <Layout
         alpha={props.params.lang}
-        jumbotronSrc={luckyGirlImg}
         kicker="Saving your money since 2024"
         title={
           <>
@@ -26,20 +23,25 @@ export default async function StorePage(props: any) {
           </>
         }
         subtitle="Get your Coupon today and save yourself up to 50% of your money">
-        <div className="flex flex-col items-center justify-center border-1 border-gray rounded-3xl p-8">
+        <div className="flex flex-col items-center justify-center border-1 border-gray rounded-3xl py-8 px-8 lg:px-36 gap-y-3">
           <Image
-            className="h-36 w-36"
+            className="h-36 w-36 rounded-3xl mb-3"
             height={200}
             width={200}
             src={store.icon}
             alt={store.store}
           />
-          <h3>{store.store}</h3>
-          <Link href="/">https:///dsasd.acom</Link>
-          <p>sdadsaadsdasads sad asdas dasd as</p>
+          <h3 className="h3 text-xl lg:text-2xl font-semibold">{store.store}</h3>
+          <a
+            target="_blank"
+            className="font-light text-primary underline text-xs lg:text-sm"
+            href={`https://${store.store}`}>
+            {store.store}
+          </a>
+          <p className="font-light text-sm lg:text-base">{store.description}</p>
         </div>
         <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
-          <CouponList coupons={coupons} />
+          <CouponList coupons={store.coupons} />
         </Coupons>
         <PopularCategories categories={popularCategories} />
       </Layout>
@@ -51,7 +53,7 @@ export default async function StorePage(props: any) {
 
 async function getServerSideProps(lang: string, storeId: string) {
   const requests = [
-    `/store/${storeId}}`,
+    `/store/${storeId}`,
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
     '/coupons?page=1&perPage=30'
@@ -67,9 +69,19 @@ async function getServerSideProps(lang: string, storeId: string) {
 
   return {
     store: apis[0] as Store,
-    coupons: apis[1],
-    bestCoupons: apis[2],
-    bestStores: apis[3] as Store[],
-    popularCategories: apis[4]
+    bestCoupons: apis[1],
+    bestStores: apis[2] as Store[],
+    popularCategories: apis[3]
+  };
+}
+
+export async function generateMetadata(props: any): Promise<Metadata> {
+  const { store } = await getServerSideProps(props.params.lang, props.params.id);
+
+  return {
+    title: store.store,
+    description: store.description,
+    keywords: store.keywords,
+    icons: store.icon
   };
 }

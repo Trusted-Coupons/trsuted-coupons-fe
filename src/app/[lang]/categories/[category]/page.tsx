@@ -1,13 +1,10 @@
+import type { Metadata } from 'next';
+import type { Store } from '@/types/api.types';
+
 import Layout from '@/components/layout';
-import { PopularStores, Coupons, PopularCategories } from '@/components/UI';
+import { Coupons, PopularCategories, CouponList } from '@/components/UI';
 
 import luckyGirlImg from '../../../../../public/images/excited-girl.png';
-import { Store } from '@/types/api.types';
-
-export interface Category {
-  id: number;
-  name: string;
-}
 
 export default async function CategoryPage(props: any) {
   try {
@@ -21,12 +18,9 @@ export default async function CategoryPage(props: any) {
         kicker="Category"
         title={<span className="text-primary">Beauty</span>}
         subtitle="Get your Coupon today and save yourself up to 50% of your money">
-        <Coupons
-          withoutHeader={true}
-          coupons={coupons}
-          bestCoupons={bestCoupons}
-          bestStores={bestStores}
-        />
+        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
+          <CouponList coupons={coupons} />
+        </Coupons>
         <PopularCategories categories={popularCategories} />
       </Layout>
     );
@@ -58,5 +52,16 @@ async function getServerSideProps(lang: string) {
     bestCoupons: apis[2],
     bestStores: apis[3] as Store[],
     popularCategories: apis[4]
+  };
+}
+
+export async function generateMetadata(props: any): Promise<Metadata> {
+  const { stores } = await getServerSideProps(props.params.lang);
+
+  return {
+    title: stores[0].store,
+    description: stores[0].description,
+    keywords: stores[0].keywords,
+    icons: stores[0].icon
   };
 }
