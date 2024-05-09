@@ -37,7 +37,7 @@ export default async function CategoriesPage(props: any) {
 
 async function getServerSideProps(lang: string) {
   const requests = [
-    '/stores-all',
+    '/categories-all',
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
     '/coupons?page=1&perPage=30'

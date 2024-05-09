@@ -1,3 +1,9 @@
+export interface Category {
+  id: number;
+  category: string;
+  coupons: number;
+}
+
 export interface Coupon {
   id: number;
   offer_id: number;

@@ -2,12 +2,10 @@
 
 import { useState, FC } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Store } from '@/types/api.types';
-
-import Image from 'next/image';
+import { Category } from '@/types/api.types';
 
 interface CategoriesProps {
-  alphabetCategories: Record<string, Store[]>;
+  alphabetCategories: Record<string, Category[]>;
 }
 
 const alphabet = ['All', ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i))];
@@ -24,14 +22,13 @@ const Categories: FC<CategoriesProps> = ({ alphabetCategories }) => {
         <div key={key} className="flex flex-col">
           <span className="pb-2">{key.toUpperCase()}</span>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 border-solid border-0 border-t border-gray py-2">
-            {stores.map(({ id, icon, store, coupons }) => (
+            {stores.map(({ id, category, coupons }) => (
               <div
                 key={id}
                 className="flex items-center bg-light-gray p-4 text-sm gap-x-4 hover:cursor-pointer"
                 onClick={() => router.push(`/${params.lang}/stores/${id}`)}>
-                <Image src={icon} width={30} height={30} alt={store} />
-                <span className="mr-auto">{store}</span>
-                <span className="text-black opacity-60">({coupons.length} coupons)</span>
+                <span className="mr-auto">{category}</span>
+                <span className="text-black opacity-60">({coupons} coupons)</span>
               </div>
             ))}
           </div>
@@ -44,14 +41,13 @@ const Categories: FC<CategoriesProps> = ({ alphabetCategories }) => {
         <span className="pb-2">{selectedChar.toUpperCase()}</span>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 border-solid border-0 border-t border-gray py-2">
           {alphabetCategories[selectedChar as keyof typeof alphabetCategories].map(
-            ({ id, icon, store, coupons }) => (
+            ({ id, category, coupons }) => (
               <div
                 key={id}
                 className="flex items-center bg-light-gray p-4 text-sm gap-x-4 hover:cursor-pointer"
                 onClick={() => router.push(`/${params.lang}/stores/${id}`)}>
-                <Image src={icon} width={30} height={30} alt={store} />
-                <span className="mr-auto">{store}</span>
-                <span className="text-black opacity-60">({coupons.length} coupons)</span>
+                <span className="mr-auto">{category}</span>
+                <span className="text-black opacity-60">({coupons} coupons)</span>
               </div>
             )
           )}
