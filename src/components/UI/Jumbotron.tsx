@@ -17,10 +17,10 @@ const Jumbotron: FC<JumbotronProps> = ({ kicker, title, subtitle }) => {
         <h1 className="h1 font-medium invisible text-lg md:w-[25rem] sm:visible md:text-4xl lg:w-[35rem] lg:text-6xl">
           {title}
         </h1>
-        <h2 className="h2 opacity-70 mr-auto ml-auto sm:ml-0 text-sm w-[15rem] md:w-[35rem] md:text-xl lg:text-2xl">
+        <h2 className="h2 opacity-70 sm:ml-0 text-sm w-[15rem] md:w-[35rem] md:text-xl lg:text-2xl">
           {subtitle}
         </h2>
-        <div className="flex gap-x-2 mr-auto ml-auto sm:ml-0 lg:gap-x-4 pt-2">
+        <div className="flex gap-x-2 sm:ml-0 lg:gap-x-4 pt-2">
           <Link
             className="bg-primary text-xs font-medium rounded-full px-2 py-1 lg:text-base lg:px-4 lg:py-2"
             href="/">

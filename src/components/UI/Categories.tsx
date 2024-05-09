@@ -6,21 +6,21 @@ import { Store } from '@/types/api.types';
 
 import Image from 'next/image';
 
-interface StoresProps {
-  alphabetStores: Record<string, Store[]>;
+interface CategoriesProps {
+  alphabetCategories: Record<string, Store[]>;
 }
 
-const Stores: FC<StoresProps> = ({ alphabetStores }) => {
+const Categories: FC<CategoriesProps> = ({ alphabetCategories }) => {
   const router = useRouter();
   const params = useParams<{ lang: string }>();
 
-  const alphabet = ['All', ...Object.keys(alphabetStores)];
+  const alphabet = ['All', ...Object.keys(alphabetCategories)];
 
   const [selectedChar, setSelectedChar] = useState('All');
 
   const renderList = () => {
     if (selectedChar == 'All') {
-      return Object.entries(alphabetStores).map(([key, stores]) => (
+      return Object.entries(alphabetCategories).map(([key, stores]) => (
         <div key={key} className="flex flex-col">
           <span className="pb-2">{key.toUpperCase()}</span>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 border-solid border-0 border-t border-gray py-2">
@@ -43,7 +43,7 @@ const Stores: FC<StoresProps> = ({ alphabetStores }) => {
       <div className="flex flex-col">
         <span className="pb-2">{selectedChar.toUpperCase()}</span>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 border-solid border-0 border-t border-gray py-2">
-          {alphabetStores[selectedChar as keyof typeof alphabetStores].map(
+          {alphabetCategories[selectedChar as keyof typeof alphabetCategories].map(
             ({ id, icon, store, coupons }) => (
               <div
                 key={id}
@@ -77,4 +77,4 @@ const Stores: FC<StoresProps> = ({ alphabetStores }) => {
   );
 };
 
-export default Stores;
+export default Categories;

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { Store } from '@/types/api.types';
 
 import Layout from '@/components/layout';
-import { Stores, Coupons, PopularCategories } from '@/components/UI';
+import { Categories, Coupons, PopularCategories, Stores } from '@/components/UI';
 
 import luckyGirlImg from '../../../../public/images/excited-girl.png';
 
@@ -14,9 +14,8 @@ export const metadata: Metadata = {
 
 export default async function CategoriesPage(props: any) {
   try {
-    const { stores, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
-      props.params.lang
-    );
+    const { alphabetCategories, bestCoupons, bestStores, popularCategories } =
+      await getServerSideProps(props.params.lang);
 
     return (
       <Layout
@@ -25,8 +24,8 @@ export default async function CategoriesPage(props: any) {
         kicker="Saving your money since 2024"
         title="Alphabetical Category List"
         subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.">
-        <Coupons bestCoupons={bestCoupons} bestStores={bestStores}>
-          <Stores stores={stores} />
+        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
+          <Categories alphabetCategories={alphabetCategories} />
         </Coupons>
         <PopularCategories categories={popularCategories} />
       </Layout>
@@ -38,7 +37,7 @@ export default async function CategoriesPage(props: any) {
 
 async function getServerSideProps(lang: string) {
   const requests = [
-    '/stores?page=1&perPage=50',
+    '/stores-all',
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
     '/coupons?page=1&perPage=30'
@@ -53,7 +52,7 @@ async function getServerSideProps(lang: string) {
   ).then(async (res) => Promise.all(res.map(async (data) => await data.json())));
 
   return {
-    stores: apis[0] as Store[],
+    alphabetCategories: apis[0] as Record<string, Store[]>,
     bestCoupons: apis[1],
     bestStores: apis[2] as Store[],
     popularCategories: apis[3]
