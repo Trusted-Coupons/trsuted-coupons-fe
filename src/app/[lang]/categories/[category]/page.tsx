@@ -8,8 +8,9 @@ import luckyGirlImg from '../../../../../public/images/excited-girl.png';
 
 export default async function CategoryPage(props: any) {
   try {
-    const { stores, coupons, bestCoupons, bestStores, popularCategories } =
-      await getServerSideProps(props.params.lang);
+    const { coupons, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
+      props.params.lang
+    );
 
     return (
       <Layout
