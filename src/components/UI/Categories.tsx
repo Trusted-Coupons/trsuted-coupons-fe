@@ -10,11 +10,11 @@ interface CategoriesProps {
   alphabetCategories: Record<string, Store[]>;
 }
 
+const alphabet = ['All', ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i))];
+
 const Categories: FC<CategoriesProps> = ({ alphabetCategories }) => {
   const router = useRouter();
   const params = useParams<{ lang: string }>();
-
-  const alphabet = ['All', ...Object.keys(alphabetCategories)];
 
   const [selectedChar, setSelectedChar] = useState('All');
 

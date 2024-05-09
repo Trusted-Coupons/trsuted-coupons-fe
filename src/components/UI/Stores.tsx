@@ -10,11 +10,11 @@ interface StoresProps {
   alphabetStores: Record<string, Store[]>;
 }
 
+const alphabet = ['All', ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i))];
+
 const Stores: FC<StoresProps> = ({ alphabetStores }) => {
   const router = useRouter();
   const params = useParams<{ lang: string }>();
-
-  const alphabet = ['All', ...Object.keys(alphabetStores)];
 
   const [selectedChar, setSelectedChar] = useState('All');
 
