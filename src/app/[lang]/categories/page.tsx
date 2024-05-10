@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { Store } from '@/types/api.types';
+import type { Category, Store } from '@/types/api.types';
 
 import Layout from '@/components/layout';
 import { Categories, Coupons, PopularCategories, Stores } from '@/components/UI';
@@ -52,7 +52,7 @@ async function getServerSideProps(lang: string) {
   ).then(async (res) => Promise.all(res.map(async (data) => await data.json())));
 
   return {
-    alphabetCategories: apis[0] as Record<string, Store[]>,
+    alphabetCategories: apis[0] as Record<string, Category[]>,
     bestCoupons: apis[1],
     bestStores: apis[2] as Store[],
     popularCategories: apis[3]

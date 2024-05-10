@@ -26,7 +26,7 @@ const Categories: FC<CategoriesProps> = ({ alphabetCategories }) => {
               <div
                 key={id}
                 className="flex items-center bg-light-gray p-4 text-sm gap-x-4 hover:cursor-pointer"
-                onClick={() => router.push(`/${params.lang}/stores/${id}`)}>
+                onClick={() => router.push(`/${params.lang}/categories/${id}`)}>
                 <span className="mr-auto">{category}</span>
                 <span className="text-black opacity-60">({coupons} coupons)</span>
               </div>
@@ -45,7 +45,7 @@ const Categories: FC<CategoriesProps> = ({ alphabetCategories }) => {
               <div
                 key={id}
                 className="flex items-center bg-light-gray p-4 text-sm gap-x-4 hover:cursor-pointer"
-                onClick={() => router.push(`/${params.lang}/stores/${id}`)}>
+                onClick={() => router.push(`/${params.lang}/categories/${id}`)}>
                 <span className="mr-auto">{category}</span>
                 <span className="text-black opacity-60">({coupons} coupons)</span>
               </div>
