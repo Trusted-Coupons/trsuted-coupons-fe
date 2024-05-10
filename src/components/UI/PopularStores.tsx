@@ -41,7 +41,13 @@ const PopularStores: FC<PopularStoresProps> = ({ stores }) => {
               key={id}
               className="border-1 border-gray py-4 px-12 rounded-md hover:cursor-pointer"
               onClick={() => router.push(`/${params.lang}/stores/${id}`)}>
-              <Image className="h-10" height={15} width={40} src={icon} alt={store} />
+              <Image
+                className="h-10"
+                height={20}
+                width={45}
+                src={`https://logo.clearbit.com/${store}?height=40`}
+                alt={store}
+              />
             </li>
           ))}
         </ul>

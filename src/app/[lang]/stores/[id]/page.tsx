@@ -28,7 +28,7 @@ export default async function StorePage(props: any) {
             className="h-36 w-36 rounded-3xl mb-3"
             height={200}
             width={200}
-            src={store.icon}
+            src={`https://logo.clearbit.com/${store.store}?height=200`}
             alt={store.store}
           />
           <h3 className="h3 text-xl lg:text-2xl font-semibold">{store.store}</h3>

@@ -75,13 +75,13 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
           <div className="border-1 border-gray rounded-3xl p-6 lg:p-8 mb-8 lg:mb-0">
             <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Best Stores</h3>
             <div className="grid grid-cols-5 gap-3 mb-1 border-1 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer">
-              {bestStores.map(({ id, icon }) => (
+              {bestStores.map(({ id, store, icon }) => (
                 <Image
                   key={id}
-                  src={icon}
+                  src={`https://logo.clearbit.com/${store}?height=15`}
                   height={15}
                   width={40}
-                  alt="coupon card"
+                  alt={store}
                   onClick={() => router.push(`/${params.lang}/stores/${id}`)}
                 />
               ))}
