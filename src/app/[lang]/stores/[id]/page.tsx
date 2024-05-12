@@ -79,8 +79,8 @@ export async function generateMetadata(props: any): Promise<Metadata> {
   const { store } = await getServerSideProps(props.params.lang, props.params.id);
 
   return {
-    title: store.store,
-    description: store.description,
+    title: store.storeMetadata[0].metadata_title,
+    description: store.storeMetadata[0].metadata_title,
     keywords: store.keywords,
     icons: store.icon
   };

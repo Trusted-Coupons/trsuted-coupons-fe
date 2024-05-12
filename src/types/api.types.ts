@@ -4,6 +4,14 @@ export interface Category {
   coupons: number;
 }
 
+interface StoreMetadata {
+  id: number;
+  country: string;
+  language: string;
+  metadata_title: string;
+  metadata_description: string;
+}
+
 export interface Coupon {
   id: number;
   offer_id: number;
@@ -52,4 +60,5 @@ export interface Store {
   countries: string[];
   country_language: string[];
   coupons: Coupon[];
+  storeMetadata: StoreMetadata[];
 }
