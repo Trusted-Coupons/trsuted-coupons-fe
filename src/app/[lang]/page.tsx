@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { Store } from '@/types/api.types';
+import type { Category, Store } from '@/types/api.types';
 
 import Layout from '@/components/layout';
 import { PopularStores, Coupons, PopularCategories, CouponList } from '@/components/UI';
@@ -46,7 +46,7 @@ async function getServerSideProps(page = 1, lang: string) {
     '/coupons?page=1&perPage=10',
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
-    '/coupons?page=1&perPage=30'
+    '/categories'
   ];
 
   const apis = await Promise.all(
@@ -62,6 +62,6 @@ async function getServerSideProps(page = 1, lang: string) {
     coupons: apis[1],
     bestCoupons: apis[2],
     bestStores: apis[3] as Store[],
-    popularCategories: apis[4]
+    popularCategories: apis[4] as Category[]
   };
 }

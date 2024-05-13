@@ -40,7 +40,7 @@ async function getServerSideProps(lang: string) {
     '/categories-all',
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
-    '/coupons?page=1&perPage=30'
+    '/categories'
   ];
 
   const apis = await Promise.all(
@@ -55,6 +55,6 @@ async function getServerSideProps(lang: string) {
     alphabetCategories: apis[0] as Record<string, Category[]>,
     bestCoupons: apis[1],
     bestStores: apis[2] as Store[],
-    popularCategories: apis[3]
+    popularCategories: apis[3] as Category[]
   };
 }
