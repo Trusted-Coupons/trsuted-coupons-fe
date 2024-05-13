@@ -1,10 +1,7 @@
 import type { ReactNode } from 'react';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-
-import { Header, Jumbotron } from '@/components/UI';
-import Footer from '../components/UI/Footer';
+import { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
 

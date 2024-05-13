@@ -1,15 +1,14 @@
-import type { Metadata } from 'next';
-
 import Layout from '@/components/layout';
 import { Stores, Coupons, PopularCategories } from '@/components/UI';
 import type { Store } from '@/types/api.types';
 
 import luckyGirlImg from '../../../../public/images/confident-girl.png';
+import { getDictionary } from '@/app/dictionaries';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Alphabetical Store List',
-  description:
-    'In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.',
+  title: 'Trusted Coupons - search by letters',
+  description: 'Lorem Ipsum is Lorem Ipsum',
   keywords: 'Trusted, Coupons'
 };
 
@@ -18,15 +17,16 @@ export default async function StoresPage(props: any) {
     const { alphabetStores, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
       props.params.lang
     );
-
+    const dict = await getDictionary(props.params.lang);
     return (
       <Layout
         alpha={props.params.lang}
         jumbotronSrc={luckyGirlImg}
         kicker="Saving your money since 2024"
         title="Alphabetical Store List"
-        subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.">
-        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
+        subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante."
+        dict={dict}>
+        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores} dict={dict}>
           <Stores alphabetStores={alphabetStores} />
         </Coupons>
         <PopularCategories categories={popularCategories} />

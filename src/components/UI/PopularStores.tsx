@@ -8,21 +8,19 @@ import Image from 'next/image';
 
 interface PopularStoresProps {
   stores: Store[];
+  dict: any;
 }
 
-const PopularStores: FC<PopularStoresProps> = ({ stores }) => {
+const PopularStores: FC<PopularStoresProps> = ({ stores, dict }) => {
   const router = useRouter();
   const params = useParams<{ lang: string }>();
 
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-y-1 mb-6 text-black max-w-7xl py-4 lg:mb-0 lg:py-12 lg:gap-y-3">
-        <h4 className="uppercase text-xs font-medium md:text-base">Saving your money since 2024</h4>
-        <h2 className="font-medium text-lg md:text-4xl">
-          Popular <span className="text-primary">stores</span>
-        </h2>
+        <h2 className="font-medium text-lg md:text-4xl">{dict.heading.popular_stores}</h2>
         <h3 className="opacity-70 text-sm font-light md:text-lg">
-          Look for your favorite store and save yourself some money
+          {dict.heading.look_for_favorite_store}
         </h3>
       </div>
       <div

@@ -6,10 +6,11 @@ import Footer from '@/components/UI/Footer';
 
 interface LayouProps {
   alpha: string;
-  kicker: string;
+  kicker?: string;
   title: ReactNode;
   subtitle: string;
   jumbotronSrc?: StaticImageData;
+  dict: any;
 }
 
 const Layout: FC<PropsWithChildren<LayouProps>> = ({
@@ -18,15 +19,16 @@ const Layout: FC<PropsWithChildren<LayouProps>> = ({
   kicker,
   title,
   subtitle,
-  jumbotronSrc
+  jumbotronSrc,
+  dict
 }) => {
   return (
     <>
-      <Header alpha={alpha} jumbotronSrc={jumbotronSrc}>
-        {jumbotronSrc && <Jumbotron kicker={kicker} title={title} subtitle={subtitle} />}
+      <Header alpha={alpha} jumbotronSrc={jumbotronSrc} dict={dict}>
+        {jumbotronSrc && <Jumbotron title={title} subtitle={subtitle} />}
       </Header>
       <div className="flex flex-col gap-y-10 max-w-[1280px] mr-auto ml-auto p-4">{children}</div>
-      <Footer alpha={alpha} />
+      <Footer alpha={alpha} dict={dict} />
     </>
   );
 };

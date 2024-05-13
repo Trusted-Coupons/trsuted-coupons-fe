@@ -1,0 +1,72 @@
+{
+  "button": { "show_code": "kodu göstərin" },
+  "category": {
+    "ai_tools": "Ai Alətləri",
+    "baby_equipment_baby_items": "Uşaq ləvazimatları və uşaq əşyaları",
+    "beauty": "Gözəllik",
+    "books": "Kitablar",
+    "car_car_accessories": "Avtomobil və Avtomobil Aksesuarları",
+    "casion_betting": "Casion & Bahis",
+    "craft_items_decoration": "Əl işləri və bəzək əşyaları",
+    "crypto_exchange": "Kripto mübadiləsi",
+    "dating_agency": "Tanışlıq agentliyi",
+    "education": "Təhsil",
+    "erotic": "Erotik",
+    "events_tickets": "Tədbirlər və Biletlər",
+    "fashion": "Moda",
+    "finance": "Maliyyə",
+    "food_drink": "Qida və İçki",
+    "gadgets": "Qadcetlər",
+    "games_toys": "Oyunlar və Oyuncaqlar",
+    "garden_flowers": "Bağ və Çiçəklər",
+    "glasses_contact_lenses": "Eynək və kontakt linzalar",
+    "hosting": "Hostinq",
+    "insurance": "Sığorta",
+    "jewelry": "Zərgərlik",
+    "lamps_and_lighting": "Lampalar və işıqlandırma",
+    "living_furnishing": "Yaşayış və Mebel",
+    "multimedia": "Multimedia",
+    "newspapers_and_magazines": "Qəzetlər və jurnallar",
+    "office_supplies_and_office_furniture": "Ofis ləvazimatları və ofis mebeli",
+    "online_stores": "Onlayn mağazalar",
+    "pc_electronics": "PC və Elektronika",
+    "pet_supplies_pet_food": "Heyvan Təchizatları və Heyvan Yeməyi",
+    "photo_photo_calendar": "Foto və foto təqvim",
+    "sportswear_fitness": "İdman Geyimləri və Fitnes",
+    "telecommunications": "Telekommunikasiya",
+    "travel_hotels_and_vacations": "Səyahət, otellər və tətillər"
+  },
+  "faq": {
+    "answer_1": "Cavab 1",
+    "answer_2": "Cavab 2",
+    "answer_3": "Cavab 3",
+    "heading": "Tez-tez soruşulan suallar",
+    "question_1": "sual 1",
+    "question_2": "Sual 2",
+    "question_3": "Sual 3"
+  },
+  "heading": {
+    "best_coupons": "Ən yaxşı kuponlar",
+    "best_stores": "Ən yaxşı Mağazalar",
+    "find_best_coupons": "İnternetdə ən yaxşı kuponları tapın",
+    "look_for_favorite_store": "Sevimli mağazanızı axtarın və özünüzə bir az pul qazanın",
+    "popular_categories": "Populyar Kateqoriyalar",
+    "popular_coupons": "Populyar Kuponlar",
+    "popular_stores": "Populyar Mağazalar"
+  },
+  "label": { "coupons": "kuponlar", "expire": "bitmək" },
+  "modal": { "click_to_copy": "kopyalamaq üçün klikləyin", "valid": "qədər etibarlıdır" },
+  "navigation": {
+    "about": "Haqqında",
+    "categories": "Kateqoriyalar",
+    "home": "Ev",
+    "stores": "Mağazalar"
+  },
+  "newsletter": {
+    "button": "Abunə ol",
+    "description": "E-poçtunuz bizimlə təhlükəsizdir və biz də sizin qədər spama nifrət edirik.",
+    "heading": "E-poçt bülleteni",
+    "placeholder_email": "E-poçtunuzu daxil edin...",
+    "placeholder_name": "Adınızı daxil edin..."
+  }
+}

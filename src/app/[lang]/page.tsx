@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
 import type { Store } from '@/types/api.types';
-
+import { getDictionary } from '../dictionaries';
 import Layout from '@/components/layout';
 import { PopularStores, Coupons, PopularCategories, CouponList } from '@/components/UI';
 import luckyGirlImg from '../../../public/images/lucky-girl.png';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Trusted Coupons',
@@ -15,22 +15,25 @@ export default async function HomePage(props: any) {
   try {
     const { stores, coupons, bestCoupons, bestStores, popularCategories } =
       await getServerSideProps(props.searchParams.page, props.params.lang);
+    const dict = await getDictionary(props.params.lang);
 
     return (
       <Layout
         alpha={props.params.lang}
         jumbotronSrc={luckyGirlImg}
-        kicker="Saving your money since 2024"
+        dict={dict}
         title={
           <>
-            <span className="text-primary">20.000+</span> Coupons{' '}
-            <span className="text-primary">1.000+</span> Stores
+            <span className="text-primary">20.000+</span>{' '}
+            <label className="capitalize">{dict.label.coupons}</label>{' '}
+            <span className="text-primary">1.000+</span>{' '}
+            <label className="capitalize">{dict.navigation.stores}</label>
           </>
         }
         subtitle="Get your Coupon today and save yourself up to 50% of your money">
-        <PopularStores stores={stores} />
-        <Coupons bestCoupons={bestCoupons} bestStores={bestStores}>
-          <CouponList coupons={coupons} />
+        <PopularStores stores={stores} dict={dict} />
+        <Coupons bestCoupons={bestCoupons} bestStores={bestStores} dict={dict}>
+          <CouponList coupons={coupons} dict={dict} />
         </Coupons>
         <PopularCategories categories={popularCategories} />
       </Layout>

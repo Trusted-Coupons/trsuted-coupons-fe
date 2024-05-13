@@ -4,6 +4,7 @@ import type { Store } from '@/types/api.types';
 import Image from 'next/image';
 import Layout from '@/components/layout';
 import { Coupons, PopularCategories, CouponList } from '@/components/UI';
+import { getDictionary } from '@/app/dictionaries';
 
 export default async function StorePage(props: any) {
   try {
@@ -11,11 +12,12 @@ export default async function StorePage(props: any) {
       props.params.lang,
       props.params.id
     );
-
+    const dict = await getDictionary(props.params.lang);
     return (
       <Layout
         alpha={props.params.lang}
         kicker="Saving your money since 2024"
+        dict={dict}
         title={
           <>
             <span className="text-primary">20.000+</span> Coupons{' '}
@@ -40,8 +42,8 @@ export default async function StorePage(props: any) {
           </a>
           <p className="font-light text-sm lg:text-base">{store.description}</p>
         </div>
-        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
-          <CouponList coupons={store.coupons} />
+        <Coupons dict={dict} withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
+          <CouponList dict={dict} coupons={store.coupons} />
         </Coupons>
         <PopularCategories categories={popularCategories} />
       </Layout>

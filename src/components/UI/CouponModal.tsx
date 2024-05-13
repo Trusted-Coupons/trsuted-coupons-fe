@@ -14,6 +14,7 @@ interface CouponModalProps {
   valid: string;
   modalIsOpen: number;
   closeModal: () => void;
+  dict: any;
 }
 
 const CouponModal: FC<CouponModalProps> = ({
@@ -24,7 +25,8 @@ const CouponModal: FC<CouponModalProps> = ({
   label,
   valid,
   modalIsOpen,
-  closeModal
+  closeModal,
+  dict
 }) => {
   const [copyValue, handleCopy] = useClipboard();
 
@@ -69,12 +71,12 @@ const CouponModal: FC<CouponModalProps> = ({
                     {code}
                   </span>
                   <span className="pt-3 text-xs lg:text-sm font-light text-center opacity-60">
-                    Click to Copy
+                    {dict.modal.click_to_copy}
                   </span>
                 </div>
                 <div className="mt-8 flex justify-center">
                   <span className="text-xs lg:text-sm font-light opacity-60">
-                    Valid until {moment(valid).format('DD MMM YYYY')}
+                    {dict.modal.valid_until} {moment(valid).format('DD MMM YYYY')}
                   </span>
                 </div>
               </Dialog.Panel>

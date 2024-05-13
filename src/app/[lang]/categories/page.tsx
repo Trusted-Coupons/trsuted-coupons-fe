@@ -1,10 +1,9 @@
-import type { Metadata } from 'next';
 import type { Category, Store } from '@/types/api.types';
-
 import Layout from '@/components/layout';
 import { Categories, Coupons, PopularCategories, Stores } from '@/components/UI';
-
 import luckyGirlImg from '../../../../public/images/excited-girl.png';
+import { getDictionary } from '@/app/dictionaries';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Trusted Coupons',
@@ -16,15 +15,16 @@ export default async function CategoriesPage(props: any) {
   try {
     const { alphabetCategories, bestCoupons, bestStores, popularCategories } =
       await getServerSideProps(props.params.lang);
-
+    const dict = await getDictionary(props.params.lang);
     return (
       <Layout
         alpha={props.params.lang}
         jumbotronSrc={luckyGirlImg}
         kicker="Saving your money since 2024"
         title="Alphabetical Category List"
+        dict={dict}
         subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.">
-        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
+        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores} dict={dict}>
           <Categories alphabetCategories={alphabetCategories} />
         </Coupons>
         <PopularCategories categories={popularCategories} />

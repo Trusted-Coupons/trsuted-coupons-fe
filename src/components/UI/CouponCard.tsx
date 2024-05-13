@@ -11,6 +11,7 @@ type CouponCardProps = {
   code: string;
   expireDate: string;
   setIsOpen: (open: boolean) => void;
+  dict: any;
 };
 
 const CouponCard = ({
@@ -20,7 +21,8 @@ const CouponCard = ({
   code,
   url,
   expireDate,
-  setIsOpen
+  setIsOpen,
+  dict
 }: CouponCardProps) => {
   const handleClick = () => {
     setIsOpen(true);
@@ -40,12 +42,12 @@ const CouponCard = ({
             className="h-fit pr-4 flex items-center font-medium bg-gray-300 rounded-full text-nowrap"
             onClick={handleClick}>
             <span className="bg-primary py-2 px-4 rounded-full text-sm lg:text-base text-white">
-              SHOW CODE
+              {dict.button.show_code}
             </span>
             {code.slice(code.length - 3)}
           </button>
           <span className="text-gray-300 text-sm lg:text-base">
-            Expire: {moment(expireDate).format('DD/MM/YYYY')}
+            {dict.label.expire}: {moment(expireDate).format('DD/MM/YYYY')}
           </span>
         </div>
       </div>

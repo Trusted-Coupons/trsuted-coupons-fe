@@ -15,9 +15,10 @@ import logo2Img from '../../../public/images/logo-2.png';
 interface HeaderProps {
   alpha: string;
   jumbotronSrc?: StaticImageData;
+  dict: any;
 }
 
-const Header: FC<PropsWithChildren<HeaderProps>> = ({ children, alpha, jumbotronSrc }) => {
+const Header: FC<PropsWithChildren<HeaderProps>> = ({ children, alpha, jumbotronSrc, dict }) => {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -30,7 +31,7 @@ const Header: FC<PropsWithChildren<HeaderProps>> = ({ children, alpha, jumbotron
           className="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8"
           aria-label="Global">
           <div className="flex lg:mr-10">
-            <Link href="/public" className="-m-1.5 p-1.5">
+            <Link href={`/${alpha}`} className="-m-1.5 p-1.5">
               <span className="sr-only">Trusted Coupons</span>
               <Image
                 width={100}
@@ -51,14 +52,26 @@ const Header: FC<PropsWithChildren<HeaderProps>> = ({ children, alpha, jumbotron
             </button>
           </div>
           <Popover.Group className="hidden lg:flex lg:gap-x-12 lg:pl-20">
-            {routes(alpha).map(({ label, href }) => (
-              <Link
-                key={label}
-                href={href}
-                className={`text-sm font-semibold leading-6 px-2.5 py-1 ${jumbotronSrc ? 'text-white' : 'text-black'} ${pathname == href && 'bg-primary rounded-full'}`}>
-                {label}
-              </Link>
-            ))}
+            <Link
+              href={`/${alpha}`}
+              className={`text-sm font-semibold leading-6 px-2.5 py-1 ${jumbotronSrc ? 'text-white' : 'text-black'} ${pathname === `/${alpha}` && 'bg-primary rounded-full'}`}>
+              {dict.navigation.home}
+            </Link>
+            <Link
+              href={`/${alpha}/stores`}
+              className={`text-sm font-semibold leading-6 px-2.5 py-1 ${jumbotronSrc ? 'text-white' : 'text-black'} ${pathname === `/${alpha}/stores` && 'bg-primary rounded-full'}`}>
+              {dict.navigation.stores}
+            </Link>
+            <Link
+              href={`/${alpha}/categories`}
+              className={`text-sm font-semibold leading-6 px-2.5 py-1 ${jumbotronSrc ? 'text-white' : 'text-black'} ${pathname === `/${alpha}/categories` && 'bg-primary rounded-full'}`}>
+              {dict.navigation.categories}
+            </Link>
+            <Link
+              href={`/${alpha}/about`}
+              className={`text-sm font-semibold leading-6 px-2.5 py-1 ${jumbotronSrc ? 'text-white' : 'text-black'} ${pathname === `/${alpha}/about` && 'bg-primary rounded-full'}`}>
+              {dict.navigation.about}
+            </Link>
           </Popover.Group>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end"></div>
         </nav>
@@ -68,7 +81,7 @@ const Header: FC<PropsWithChildren<HeaderProps>> = ({ children, alpha, jumbotron
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Trusted Coupons</span>
+              <span className="sr-only">{dict.heading.trusted_coupons}</span>
               <Image
                 width={200}
                 height={120}

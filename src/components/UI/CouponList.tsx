@@ -9,9 +9,10 @@ import Pagination from './Pagination';
 
 interface CouponListProps {
   coupons: Coupon[];
+  dict: any;
 }
 
-const CouponList: FC<CouponListProps> = ({ coupons }) => {
+const CouponList: FC<CouponListProps> = ({ coupons, dict }) => {
   const [modalIsOpen, setIsOpen] = useState(-1);
 
   function closeModal() {
@@ -32,6 +33,7 @@ const CouponList: FC<CouponListProps> = ({ coupons }) => {
                 expireDate={coupon.end_date}
                 couponImageUrl={coupon.brand_logo}
                 setIsOpen={() => setIsOpen(coupon.id)}
+                dict={dict}
               />
               {coupon.id == modalIsOpen && (
                 <CouponModal
@@ -43,6 +45,7 @@ const CouponList: FC<CouponListProps> = ({ coupons }) => {
                   valid={coupon.end_date}
                   modalIsOpen={modalIsOpen}
                   closeModal={closeModal}
+                  dict={dict}
                 />
               )}
             </Fragment>
