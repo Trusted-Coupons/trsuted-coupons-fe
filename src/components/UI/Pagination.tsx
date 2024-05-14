@@ -1,15 +1,18 @@
 import type { FC } from 'react';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
-interface PaginationProps {}
+type PaginationProps = {
+  totalPages: number;
+  id: number;
+};
 
-const Pagination: FC<PaginationProps> = () => {
+const Pagination: FC<PaginationProps> = ({ totalPages, id }) => {
   const pathname = usePathname();
   const router = useRouter();
   const page = Number(useSearchParams().get('page') ?? 1);
 
   const togglePage = (page: number) => {
-    router.push(`${pathname}?page=${page}`);
+    router.push(id === 0 ? `${pathname}?page=${page}` : `${pathname}?page=${page}&id=${id}`);
   };
 
   function generatePagination(currentPage: number, totalPages: number) {
@@ -37,7 +40,7 @@ const Pagination: FC<PaginationProps> = () => {
         onClick={() => togglePage(page - 1)}>
         {'<'}
       </span>
-      {generatePagination(page, 50).map((pg) => (
+      {generatePagination(page, totalPages)?.map((pg) => (
         <span
           key={pg}
           className={`border-1 border-gray rounded-full p-4 ${pg == page && 'border-primary'}`}
@@ -45,9 +48,17 @@ const Pagination: FC<PaginationProps> = () => {
           {pg}
         </span>
       ))}
-      <span className="border-1 border-gray rounded-full p-4" onClick={() => togglePage(page + 1)}>
-        {'>'}
-      </span>
+      {page <= totalPages ? (
+        <span
+          className="border-1 border-gray rounded-full p-4"
+          onClick={() => togglePage(page + 1)}>
+          {'>'}
+        </span>
+      ) : (
+        <span className="border-1 border-gray rounded-full p-4" onClick={() => {}}>
+          {'>'}
+        </span>
+      )}
     </div>
   );
 };

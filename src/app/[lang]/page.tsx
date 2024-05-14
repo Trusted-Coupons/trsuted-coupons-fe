@@ -35,7 +35,7 @@ export default async function HomePage(props: any) {
         <Coupons bestCoupons={bestCoupons} bestStores={bestStores} dict={dict}>
           <CouponList coupons={coupons} dict={dict} />
         </Coupons>
-        <PopularCategories categories={popularCategories} />
+        <PopularCategories categories={popularCategories} dict={dict} />
       </Layout>
     );
   } catch (error) {
@@ -45,20 +45,20 @@ export default async function HomePage(props: any) {
 
 async function getServerSideProps(page = 1, lang: string) {
   const requests = [
-    `/stores?page=${page}&perPage=50`,
-    '/coupons?page=1&perPage=10',
+    `/stores?page=1&perPage=50`,
+    `/coupons?page=${page}&perPage=10`,
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
-    '/coupons?page=1&perPage=30'
+    '/categories'
   ];
 
   const apis = await Promise.all(
-    requests.map((url) =>
+    requests?.map((url) =>
       fetch(`${process.env.API_URL}/${lang}${url}`, {
         cache: 'no-cache'
       })
     )
-  ).then(async (res) => Promise.all(res.map(async (data) => await data.json())));
+  ).then(async (res) => Promise.all(res?.map(async (data) => await data.json())));
 
   return {
     stores: apis[0] as Store[],

@@ -10,19 +10,22 @@ import Pagination from './Pagination';
 interface CouponListProps {
   coupons: Coupon[];
   dict: any;
+  id?: number | undefined;
 }
 
-const CouponList: FC<CouponListProps> = ({ coupons, dict }) => {
+const CouponList: FC<CouponListProps> = ({ coupons, dict, id }) => {
   const [modalIsOpen, setIsOpen] = useState(-1);
 
   function closeModal() {
     setIsOpen(-1);
   }
 
+  const totalPages = Math.ceil(Number(coupons[0]?.total_coupons_count) / 10);
+
   return (
     <div className="flex-1 flex flex-col">
       <div className="w-full flex flex-col flex-1 items-start gap-6">
-        {coupons.map((coupon, index) => {
+        {coupons?.map((coupon, index) => {
           return (
             <Fragment key={index}>
               <CouponCard
@@ -52,7 +55,9 @@ const CouponList: FC<CouponListProps> = ({ coupons, dict }) => {
           );
         })}
       </div>
-      <Pagination />
+      {coupons.length > 0 ? (
+        <Pagination totalPages={totalPages} id={id !== undefined ? id : 0} />
+      ) : null}
     </div>
   );
 };

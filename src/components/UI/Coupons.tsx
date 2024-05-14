@@ -48,7 +48,7 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
               <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">
                 {dict.heading.best_coupons}
               </h3>
-              {bestCoupons.map(({ id, title, brand_logo, label, description, code, end_date }) => (
+              {bestCoupons?.map(({ id, title, brand_logo, label, description, code, end_date }) => (
                 <div
                   key={id}
                   className="flex items-center gap-x-3 mb-2 border-1 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer"

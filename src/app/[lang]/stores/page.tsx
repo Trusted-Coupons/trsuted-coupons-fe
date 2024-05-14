@@ -29,7 +29,7 @@ export default async function StoresPage(props: any) {
         <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores} dict={dict}>
           <Stores alphabetStores={alphabetStores} />
         </Coupons>
-        <PopularCategories categories={popularCategories} />
+        <PopularCategories categories={popularCategories} dict={dict} />
       </Layout>
     );
   } catch (error) {
@@ -42,16 +42,16 @@ async function getServerSideProps(lang: string) {
     '/stores-all',
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
-    '/coupons?page=1&perPage=30'
+    '/categories'
   ];
 
   const apis = await Promise.all(
-    requests.map((url) =>
+    requests?.map((url) =>
       fetch(`${process.env.API_URL}/${lang}${url}`, {
         cache: 'no-cache'
       })
     )
-  ).then(async (res) => Promise.all(res.map(async (data) => await data.json())));
+  ).then(async (res) => Promise.all(res?.map(async (data) => await data.json())));
 
   return {
     alphabetStores: apis[0] as Record<string, Store[]>,

@@ -101,7 +101,7 @@ const Header: FC<PropsWithChildren<HeaderProps>> = ({ children, alpha, jumbotron
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {routes(alpha).map(({ label, href }) => (
+                {routes(alpha)?.map(({ label, href }) => (
                   <Link
                     key={label}
                     href={href}

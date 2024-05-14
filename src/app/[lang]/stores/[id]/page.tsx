@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { Store } from '@/types/api.types';
+import type { Coupon, Store } from '@/types/api.types';
 
 import Image from 'next/image';
 import Layout from '@/components/layout';
@@ -8,10 +8,13 @@ import { getDictionary } from '@/app/dictionaries';
 
 export default async function StorePage(props: any) {
   try {
-    const { store, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
+    const { store, coupons, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
       props.params.lang,
-      props.params.id
+      props.params.id,
+      props.searchParams.id,
+      props.searchParams.page ? props.searchParams.page : 1
     );
+
     const dict = await getDictionary(props.params.lang);
     return (
       <Layout
@@ -30,22 +33,22 @@ export default async function StorePage(props: any) {
             className="h-36 w-36 rounded-3xl mb-3"
             height={200}
             width={200}
-            src={`https://logo.clearbit.com/${store.store}?height=200`}
-            alt={store.store}
+            src={`https://logo.clearbit.com/${props.params.id}?height=200`}
+            alt={props.params.id}
           />
-          <h3 className="h3 text-xl lg:text-2xl font-semibold">{store.store}</h3>
+          <h3 className="h3 text-xl lg:text-2xl font-semibold">{props.params.id}</h3>
           <a
             target="_blank"
             className="font-light text-primary underline text-xs lg:text-sm"
-            href={`https://${store.store}`}>
-            {store.store}
+            href={`https://${props.params.id}`}>
+            {props.params.id}
           </a>
           <p className="font-light text-sm lg:text-base">{store.description}</p>
         </div>
         <Coupons dict={dict} withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
-          <CouponList dict={dict} coupons={store.coupons} />
+          <CouponList dict={dict} coupons={coupons} id={store.id} />
         </Coupons>
-        <PopularCategories categories={popularCategories} />
+        <PopularCategories categories={popularCategories} dict={dict} />
       </Layout>
     );
   } catch (error) {
@@ -53,37 +56,44 @@ export default async function StorePage(props: any) {
   }
 }
 
-async function getServerSideProps(lang: string, storeId: string) {
+async function getServerSideProps(lang: string, store: string, storeId: number, page: number) {
   const requests = [
-    `/store/${storeId}`,
+    `/coupons?page=${page}&perPage=10&store=${store}`,
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
-    '/coupons?page=1&perPage=30'
+    '/categories',
+    `/store/${storeId}`
   ];
 
   const apis = await Promise.all(
-    requests.map((url) =>
+    requests?.map((url) =>
       fetch(`${process.env.API_URL}/${lang}${url}`, {
         cache: 'no-cache'
       })
     )
-  ).then(async (res) => Promise.all(res.map(async (data) => await data.json())));
+  ).then(async (res) => Promise.all(res?.map(async (data) => await data?.json())));
 
   return {
-    store: apis[0] as Store,
+    coupons: apis[0] as Coupon[],
     bestCoupons: apis[1],
     bestStores: apis[2] as Store[],
-    popularCategories: apis[3]
+    popularCategories: apis[3],
+    store: apis[4] as Store
   };
 }
 
 export async function generateMetadata(props: any): Promise<Metadata> {
-  const { store } = await getServerSideProps(props.params.lang, props.params.id);
+  const { store } = await getServerSideProps(
+    props.params.lang,
+    props.params.id,
+    props.searchParams.id,
+    1
+  );
 
   return {
-    title: store.storeMetadata[0].metadata_title,
-    description: store.storeMetadata[0].metadata_title,
-    keywords: store.keywords,
-    icons: store.icon
+    title: store?.storeMetadata[0]?.metadata_title,
+    description: store?.storeMetadata[0]?.metadata_title,
+    keywords: store?.keywords,
+    icons: store?.icon
   };
 }

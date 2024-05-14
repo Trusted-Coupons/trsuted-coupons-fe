@@ -1,1 +1,67 @@
-{"button":{"show_code":"wys kode"},"category":{"ai_tools":"Ai Gereedskap","baby_equipment_baby_items":"Baba toerusting & baba items","beauty":"Skoonheid","books":"Boeke","car_car_accessories":"Motor & Motor Toebehore","casion_betting":"Casion & Weddery","craft_items_decoration":"Handwerk items & versiering","crypto_exchange":"Kripto uitruil","dating_agency":"Dating agentskap","education":"Onderwys","erotic":"Eroties","events_tickets":"Geleenthede & Kaartjies","fashion":"Mode","finance":"Finansies","food_drink":"Kos & Drank","gadgets":"Gadgets","games_toys":"Speletjies en speelgoed","garden_flowers":"Tuin & Blomme","glasses_contact_lenses":"Brille en kontaklense","hosting":"Gasheer","insurance":"Versekering","jewelry":"Juweliersware","lamps_and_lighting":"Lampe en beligting","living_furnishing":"Woon & Meubels","multimedia":"Multimedia","newspapers_and_magazines":"Koerante en tydskrifte","office_supplies_and_office_furniture":"Kantoorbenodigdhede en kantoormeubels","online_stores":"Aanlyn winkels","pc_electronics":"PC & Elektronika","pet_supplies_pet_food":"Troeteldierbenodigdhede & Troeteldierkos","photo_photo_calendar":"Foto en foto kalender","sportswear_fitness":"Sportdrag en fiksheid","telecommunications":"Telekommunikasie","travel_hotels_and_vacations":"Reis, hotelle en vakansies"},"faq":{"answer_1":"Antwoord 1","answer_2":"Antwoord 2","answer_3":"Antwoord 3","heading":"Gereelde Vrae","question_1":"Vraag 1","question_2":"Vraag 2","question_3":"Vraag 3"},"heading":{"best_coupons":"Beste koepons","best_stores":"Beste winkels","find_best_coupons":"Vind die beste koepons op die internet","look_for_favorite_store":"Soek jou gunsteling winkel en spaar vir jou geld","popular_categories":"Gewilde kategorieë","popular_coupons":"Gewilde koepons","popular_stores":"Gewilde winkels"},"label":{"coupons":"koepons","expire":"verval"},"modal":{"click_to_copy":"klik om te kopieer","valid":"geldig tot"},"navigation":{"about":"Oor","categories":"Kategorieë","home":"Tuis","stores":"Winkels"},"newsletter":{"button":"Teken in","description":"Jou e-pos is veilig by ons en ons haat strooipos net soveel soos jy.","heading":"E-pos nuusbrief","placeholder_email":"Gee jou e-pos...","placeholder_name":"Gee jou naam..."}}
+{
+  "button": { "show_code": "wys kode" },
+  "category": {
+    "ai_tools": "Ai Gereedskap",
+    "baby_equipment_baby_items": "Baba toerusting & baba items",
+    "beauty": "Skoonheid",
+    "books": "Boeke",
+    "car_car_accessories": "Motor & Motor Toebehore",
+    "casion_betting": "Casion & Weddery",
+    "craft_items_decoration": "Handwerk items & versiering",
+    "crypto_exchange": "Kripto uitruil",
+    "dating_agency": "Dating agentskap",
+    "education": "Onderwys",
+    "erotic": "Eroties",
+    "events_tickets": "Geleenthede & Kaartjies",
+    "fashion": "Mode",
+    "finance": "Finansies",
+    "food_drink": "Kos & Drank",
+    "gadgets": "Gadgets",
+    "games_toys": "Speletjies en speelgoed",
+    "garden_flowers": "Tuin & Blomme",
+    "glasses_contact_lenses": "Brille en kontaklense",
+    "hosting": "Gasheer",
+    "insurance": "Versekering",
+    "jewelry": "Juweliersware",
+    "lamps_and_lighting": "Lampe en beligting",
+    "living_furnishing": "Woon & Meubels",
+    "multimedia": "Multimedia",
+    "newspapers_and_magazines": "Koerante en tydskrifte",
+    "office_supplies_and_office_furniture": "Kantoorbenodigdhede en kantoormeubels",
+    "online_stores": "Aanlyn winkels",
+    "pc_electronics": "PC & Elektronika",
+    "pet_supplies_pet_food": "Troeteldierbenodigdhede & Troeteldierkos",
+    "photo_photo_calendar": "Foto en foto kalender",
+    "sportswear_fitness": "Sportdrag en fiksheid",
+    "telecommunications": "Telekommunikasie",
+    "travel_hotels_and_vacations": "Reis, hotelle en vakansies"
+  },
+  "faq": {
+    "answer_1": "Antwoord 1",
+    "answer_2": "Antwoord 2",
+    "answer_3": "Antwoord 3",
+    "heading": "Gereelde Vrae",
+    "question_1": "Vraag 1",
+    "question_2": "Vraag 2",
+    "question_3": "Vraag 3"
+  },
+  "heading": {
+    "best_coupons": "Beste koepons",
+    "best_stores": "Beste winkels",
+    "find_best_coupons": "Vind die beste koepons op die internet",
+    "look_for_favorite_store": "Soek jou gunsteling winkel en spaar vir jou geld",
+    "popular_categories": "Gewilde kategorieë",
+    "popular_coupons": "Gewilde koepons",
+    "popular_stores": "Gewilde winkels"
+  },
+  "label": { "coupons": "koepons", "expire": "verval" },
+  "modal": { "click_to_copy": "klik om te kopieer", "valid": "geldig tot" },
+  "navigation": { "about": "Oor", "categories": "Kategorieë", "home": "Tuis", "stores": "Winkels" },
+  "newsletter": {
+    "button": "Teken in",
+    "description": "Jou e-pos is veilig by ons en ons haat strooipos net soveel soos jy.",
+    "heading": "E-pos nuusbrief",
+    "placeholder_email": "Gee jou e-pos...",
+    "placeholder_name": "Gee jou naam..."
+  }
+}

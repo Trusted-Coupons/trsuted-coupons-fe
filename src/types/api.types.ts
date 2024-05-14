@@ -38,6 +38,7 @@ export interface Coupon {
   primary_location: string;
   rating: null;
   table_name: string;
+  total_coupons_count: string;
 }
 
 export interface Store {
