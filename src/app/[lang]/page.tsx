@@ -42,7 +42,7 @@ export default async function HomePage(props: any) {
 
 async function getServerSideProps(page = 1, lang: string) {
   const requests = [
-    `/stores?page=${page}&perPage=50`,
+    `/stores?page=${page}&perPage=10`,
     '/coupons?page=1&perPage=10',
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',

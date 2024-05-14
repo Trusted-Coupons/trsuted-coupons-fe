@@ -1,7 +1,7 @@
 'use client';
 
 import { Fragment, useState, FC } from 'react';
-import { Coupon } from '@/types/api.types';
+import type { Coupon } from '@/types/api.types';
 
 import CouponCard from './CouponCard';
 import CouponModal from './CouponModal';
@@ -26,6 +26,7 @@ const CouponList: FC<CouponListProps> = ({ coupons }) => {
             <Fragment key={index}>
               <CouponCard
                 title={coupon.title}
+                store={coupon.store}
                 url={coupon.affiliate_link}
                 description={coupon.description}
                 code={coupon.code}
@@ -35,8 +36,11 @@ const CouponList: FC<CouponListProps> = ({ coupons }) => {
               />
               {coupon.id == modalIsOpen && (
                 <CouponModal
+                  id={coupon.id}
+                  couponTable={coupon.table_name}
+                  store={coupon.store}
                   title={coupon.title}
-                  logo={coupon.brand_logo}
+                  clicked={coupon.rating}
                   label={coupon.label}
                   description={coupon.description}
                   code={coupon.code}

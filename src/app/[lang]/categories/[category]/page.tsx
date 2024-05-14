@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { Store } from '@/types/api.types';
+import type { Category, Coupon, Store } from '@/types/api.types';
 
 import Layout from '@/components/layout';
 import { Coupons, PopularCategories, CouponList } from '@/components/UI';
@@ -8,16 +8,15 @@ import luckyGirlImg from '../../../../../public/images/excited-girl.png';
 
 export default async function CategoryPage(props: any) {
   try {
-    const { coupons, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
-      props.params.lang
-    );
+    const { category, coupons, bestCoupons, bestStores, popularCategories } =
+      await getServerSideProps(props.params.category, props.params.lang);
 
     return (
       <Layout
         alpha={props.params.lang}
         jumbotronSrc={luckyGirlImg}
         kicker="Category"
-        title={<span className="text-primary">Beauty</span>}
+        title={<span className="text-primary">{category.category}</span>}
         subtitle="Get your Coupon today and save yourself up to 50% of your money">
         <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
           <CouponList coupons={coupons} />
@@ -30,13 +29,14 @@ export default async function CategoryPage(props: any) {
   }
 }
 
-async function getServerSideProps(lang: string) {
+async function getServerSideProps(category: string, lang: string) {
   const requests = [
+    `/category/${category}`,
     '/stores?page=1&perPage=50',
     '/coupons?page=1&perPage=10',
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
-    '/coupons?page=1&perPage=30'
+    '/categories'
   ];
 
   const apis = await Promise.all(
@@ -48,16 +48,17 @@ async function getServerSideProps(lang: string) {
   ).then(async (res) => Promise.all(res.map(async (data) => await data.json())));
 
   return {
+    category: apis[0] as Category,
     stores: apis[0] as Store[],
-    coupons: apis[1],
-    bestCoupons: apis[2],
+    coupons: apis[1] as Coupon[],
+    bestCoupons: apis[2] as Coupon[],
     bestStores: apis[3] as Store[],
-    popularCategories: apis[4]
+    popularCategories: apis[4] as Category[]
   };
 }
 
 export async function generateMetadata(props: any): Promise<Metadata> {
-  const { stores } = await getServerSideProps(props.params.lang);
+  const { stores } = await getServerSideProps(props.params.category, props.params.lang);
 
   return {
     title: stores[0].store,

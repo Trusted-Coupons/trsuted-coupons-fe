@@ -40,6 +40,9 @@ const Stores: FC<StoresProps> = ({ alphabetStores }) => {
               </div>
             ))}
           </div>
+          {stores.length == 0 && (
+            <span className="opacity-40 ml-auto mr-auto text-xs lg:text-sm">No stores to show</span>
+          )}
         </div>
       ));
     }
@@ -54,13 +57,21 @@ const Stores: FC<StoresProps> = ({ alphabetStores }) => {
                 key={id}
                 className="flex items-center bg-light-gray p-4 text-sm gap-x-4 hover:cursor-pointer"
                 onClick={() => router.push(`/${params.lang}/stores/${id}`)}>
-                <Image src={icon} width={30} height={30} alt={store} />
+                <Image
+                  src={`https://logo.clearbit.com/${store}?height=30`}
+                  width={30}
+                  height={30}
+                  alt={store}
+                />
                 <span className="mr-auto">{store}</span>
                 <span className="text-black opacity-60">({coupons.length} coupons)</span>
               </div>
             )
           )}
         </div>
+        {alphabetStores[selectedChar as keyof typeof alphabetStores].length == 0 && (
+          <span className="opacity-40 ml-auto mr-auto text-xs lg:text-sm">No stores to show</span>
+        )}
       </div>
     );
   };

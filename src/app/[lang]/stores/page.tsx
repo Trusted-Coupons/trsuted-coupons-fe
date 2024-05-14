@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import Layout from '@/components/layout';
 import { Stores, Coupons, PopularCategories } from '@/components/UI';
-import type { Store } from '@/types/api.types';
+import type { Category, Store } from '@/types/api.types';
 
 import luckyGirlImg from '../../../../public/images/confident-girl.png';
 
@@ -42,7 +42,7 @@ async function getServerSideProps(lang: string) {
     '/stores-all',
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
-    '/coupons?page=1&perPage=30'
+    '/categories'
   ];
 
   const apis = await Promise.all(
@@ -57,6 +57,6 @@ async function getServerSideProps(lang: string) {
     alphabetStores: apis[0] as Record<string, Store[]>,
     bestCoupons: apis[1],
     bestStores: apis[2] as Store[],
-    popularCategories: apis[3]
+    popularCategories: apis[3] as Category[]
   };
 }

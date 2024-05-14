@@ -1,32 +1,55 @@
-import { Fragment, FC } from 'react';
+import { Fragment, FC, useState } from 'react';
+import moment from 'moment';
 import useClipboard from '@/hooks/useClipboard';
 
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
-import moment from 'moment';
 
 interface CouponModalProps {
+  id: number;
   title: string;
-  logo: string;
+  store: string;
   description: string;
+  clicked: number;
   label: string;
   code: string;
   valid: string;
+  couponTable: string;
   modalIsOpen: number;
   closeModal: () => void;
 }
 
 const CouponModal: FC<CouponModalProps> = ({
+  id,
   title,
   description,
+  store,
+  clicked,
+  couponTable,
   code,
-  logo,
   label,
   valid,
   modalIsOpen,
   closeModal
 }) => {
+  const [couponClickedTimes, setCouponClickedTimes] = useState(clicked);
   const [copyValue, handleCopy] = useClipboard();
+
+  const handleClicked = async () => {
+    try {
+      await handleCopy(code);
+      await fetch(`${process.env.API_URL}/coupon/rate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ coupons_table: couponTable, coupon_id: id })
+      });
+      setCouponClickedTimes(couponClickedTimes + 1);
+    } catch (e) {
+      setCouponClickedTimes(couponClickedTimes - 1);
+    }
+  };
 
   return (
     <Transition appear show={Boolean(modalIsOpen)} as={Fragment}>
@@ -52,8 +75,14 @@ const CouponModal: FC<CouponModalProps> = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-10 text-left align-middle shadow-xl transition-all">
-                <div className="flex items-center justify-between gap-x-3 px-3 pb-8">
-                  <Image className="w-20" width={100} height={50} src={logo} alt={title} />
+                <div className="flex items-center justify-between gap-x-3 pb-8">
+                  <Image
+                    className="w-8"
+                    width={100}
+                    height={50}
+                    src={`https://logo.clearbit.com/${store}?height=15`}
+                    alt={title}
+                  />
                   <span className="text-xs lg:text-sm uppercase font-semibold">{label}</span>
                 </div>
                 <Dialog.Title as="h3" className="text-base lg:text-lg font-medium leading-6">
@@ -61,11 +90,14 @@ const CouponModal: FC<CouponModalProps> = ({
                 </Dialog.Title>
                 <div className="mt-6">
                   <p className="text-sm lg:text-base font-light">{description}</p>
+                  <span className="block text-xs lg:text-sm font-light opacity-60 mt-2">
+                    Clicked: {couponClickedTimes}
+                  </span>
                 </div>
                 <div className="mt-6 flex flex-col">
                   <span
                     className={`p-4 text-center text-sm lg:text-base border-dashed border-1 text-primary ${copyValue && 'bg-gray text-white'} hover:cursor-pointer`}
-                    onClick={() => handleCopy(code)}>
+                    onClick={handleClicked}>
                     {code}
                   </span>
                   <span className="pt-3 text-xs lg:text-sm font-light text-center opacity-60">

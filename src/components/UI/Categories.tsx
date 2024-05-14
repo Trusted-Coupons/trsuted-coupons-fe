@@ -31,6 +31,11 @@ const Categories: FC<CategoriesProps> = ({ alphabetCategories }) => {
               </div>
             ))}
           </div>
+          {stores.length == 0 && (
+            <span className="opacity-40 ml-auto mr-auto text-xs lg:text-sm">
+              No categories to show
+            </span>
+          )}
         </div>
       ));
     }
@@ -51,6 +56,11 @@ const Categories: FC<CategoriesProps> = ({ alphabetCategories }) => {
             )
           )}
         </div>
+        {alphabetCategories[selectedChar as keyof typeof alphabetCategories].length == 0 && (
+          <span className="opacity-40 ml-auto mr-auto text-xs lg:text-sm">
+            No categories to show
+          </span>
+        )}
       </div>
     );
   };

@@ -36,7 +36,7 @@ export interface Coupon {
   end_date: string;
   status: string;
   primary_location: string;
-  rating: null;
+  rating: number;
   table_name: string;
 }
 

@@ -7,6 +7,8 @@ import type { Store, Coupon } from '@/types/api.types';
 import Image from 'next/image';
 import CouponModal from './CouponModal';
 
+import tagImg from '../../../public/images/tag.png';
+
 interface CouponsProps {
   bestCoupons: Coupon[];
   bestStores: Store[];
@@ -50,27 +52,32 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
         <div className="w-full flex-col md:flex md:max-w-[20rem] lg:max-w-[25rem] lg:gap-y-6">
           <div className="border-1 mb-8 border-gray rounded-3xl p-6 lg:p-8 lg:mb-0">
             <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Best Coupons</h3>
-            {bestCoupons.map(({ id, title, brand_logo, label, description, code, end_date }) => (
-              <div
-                key={id}
-                className="flex items-center gap-x-3 mb-2 border-1 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer"
-                onClick={() => setIsOpen(id)}>
-                <Image className="h-5 w-5" src={brand_logo} width={16} height={16} alt={title} />
-                {id == modalIsOpen && (
-                  <CouponModal
-                    title={title}
-                    logo={brand_logo}
-                    label={label}
-                    description={description}
-                    code={code}
-                    valid={end_date}
-                    modalIsOpen={modalIsOpen}
-                    closeModal={closeModal}
-                  />
-                )}
-                <span className="text-xs lg:text-sm">{title}</span>
-              </div>
-            ))}
+            {bestCoupons.map(
+              ({ id, table_name, store, rating, title, label, description, code, end_date }) => (
+                <div
+                  key={id}
+                  className="flex items-center gap-x-3 mb-2 border-1 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer"
+                  onClick={() => setIsOpen(id)}>
+                  <Image className="h-5 w-5" src={tagImg} width={17} height={14} alt={title} />
+                  {id == modalIsOpen && (
+                    <CouponModal
+                      title={title}
+                      clicked={rating}
+                      couponTable={table_name}
+                      label={label}
+                      store={store}
+                      description={description}
+                      code={code}
+                      valid={end_date}
+                      modalIsOpen={modalIsOpen}
+                      closeModal={closeModal}
+                      id={id}
+                    />
+                  )}
+                  <span className="text-xs lg:text-sm">{title}</span>
+                </div>
+              )
+            )}
           </div>
           <div className="border-1 border-gray rounded-3xl p-6 lg:p-8 mb-8 lg:mb-0">
             <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Best Stores</h3>

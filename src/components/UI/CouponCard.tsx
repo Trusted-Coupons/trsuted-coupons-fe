@@ -6,6 +6,7 @@ import Image from 'next/image';
 type CouponCardProps = {
   couponImageUrl: string;
   title: string;
+  store: string;
   description: string;
   url: string;
   code: string;
@@ -15,7 +16,7 @@ type CouponCardProps = {
 
 const CouponCard = ({
   title,
-  couponImageUrl,
+  store,
   description,
   code,
   url,
@@ -30,7 +31,13 @@ const CouponCard = ({
   return (
     <div className="flex w-full gap-5 border-1 border-gray rounded-3xl p-6 lg:p-8">
       <div className="hidden lg:block p-5">
-        <Image src={couponImageUrl} width={200} height={40} alt="coupon card" />
+        <Image
+          className="max-w-[5rem]"
+          src={`https://logo.clearbit.com/${store}?height=200`}
+          width={200}
+          height={40}
+          alt={store}
+        />
       </div>
       <div className="flex flex-col gap-y-5">
         <h3 className="text-base lg:text-2xl font-medium">{title}</h3>
