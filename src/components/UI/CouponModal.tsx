@@ -47,7 +47,9 @@ const CouponModal: FC<CouponModalProps> = ({
       });
       setCouponClickedTimes(couponClickedTimes + 1);
     } catch (e) {
-      setCouponClickedTimes(couponClickedTimes - 1);
+      setCouponClickedTimes(
+        clicked != couponClickedTimes ? couponClickedTimes - 1 : couponClickedTimes
+      );
     }
   };
 
