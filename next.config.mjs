@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    API_URL: 'http://localhost:3010'
+    API_URL: process.env.HOST
   },
   images: {
     remotePatterns: [

@@ -52,19 +52,20 @@ const Stores: FC<StoresProps> = ({ alphabetStores }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 border-solid border-0 border-t border-gray py-2">
           {alphabetStores[selectedChar as keyof typeof alphabetStores]?.map(
             ({ id, store, coupons }) => (
-              <div
+              <Link
                 key={id}
-                className="flex items-center bg-light-gray p-4 text-sm gap-x-4 hover:cursor-pointer"
-                onClick={() => router.push(`/${params.lang}/stores/${id}`)}>
+                href={{ pathname: `/${params.lang}/stores/${store}`, query: { id: id } }}
+                className="flex items-center bg-light-gray p-4 text-sm gap-x-4 hover:cursor-pointer">
                 <Image
                   src={`https://logo.clearbit.com/${store}?height=30`}
                   width={30}
                   height={30}
                   alt={store}
                 />
+
                 <span className="mr-auto">{store}</span>
                 <span className="text-black opacity-60">({coupons.length} coupons)</span>
-              </div>
+              </Link>
             )
           )}
         </div>

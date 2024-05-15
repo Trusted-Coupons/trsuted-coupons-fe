@@ -87,7 +87,7 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
                     height={15}
                     width={40}
                     alt={store}
-                    onClick={() => router.push(`/${params.lang}/stores/${id}`)}
+                    onClick={() => router.push(`/${params.lang}/stores/${store}?id=${id}`)}
                   />
                 ))}
               </div>

@@ -64,7 +64,6 @@ const Footer: FC<FooterProps> = ({ alpha, dict }) => {
           </button>
         </div>
         <div className="flex-1">
-          <h5 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Company Info</h5>
           <ul className="flex flex-col gap-y-4 opacity-60">
             <li className="border-b-1 pb-2 text-sm lg:text-base">
               <Link href={`/${alpha}`}>{dict.navigation.home}</Link>
