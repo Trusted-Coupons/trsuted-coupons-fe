@@ -1,12 +1,8 @@
 'use client';
-
 import React, { FC } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/16/solid';
-import { routes } from '@/utils/routes';
 import Link from 'next/link';
-import Image from 'next/image';
-import placeholder from '../../../public/images/coupon_placeholder_01.jpg';
 
 interface FooterProps {
   alpha: string;

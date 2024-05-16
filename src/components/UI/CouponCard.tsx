@@ -4,7 +4,6 @@ import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Coupon } from '@/types/api.types';
-import logo1Img from '../../../public/images/logo-1.png';
 
 type CouponCardProps = {
   coupon: Coupon;

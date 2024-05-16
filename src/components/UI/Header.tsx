@@ -1,14 +1,11 @@
 'use client';
-
 import { useState, FC, PropsWithChildren } from 'react';
 import { usePathname } from 'next/navigation';
 import { routes } from '@/utils/routes';
-
 import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image';
 import { Dialog, Popover } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-
 import logo1Img from '../../../public/images/logo-1.png';
 import logo2Img from '../../../public/images/logo-2.png';
 

@@ -1,7 +1,6 @@
 'use client';
 import { Fragment, useState, FC, useEffect } from 'react';
 import { Coupon } from '@/types/api.types';
-
 import CouponCard from './CouponCard';
 import CouponModal from './CouponModal';
 import Pagination from './Pagination';
