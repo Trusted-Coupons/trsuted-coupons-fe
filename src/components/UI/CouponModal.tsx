@@ -24,6 +24,7 @@ const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, di
       isOpen={modalIsOpen}
       contentLabel="Minimal Modal Example"
       onRequestClose={closeModall}
+      ariaHideApp={false}
       style={{
         overlay: {
           backgroundColor: 'rgba(119, 119, 119, 0.05)'

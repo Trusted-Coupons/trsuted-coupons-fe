@@ -15,7 +15,6 @@ export default async function CategoryPage(props: any) {
     const dict = await getDictionary(props.params.lang);
 
     const returnCategorieKey = (catId: number) => {
-      console.log(catId);
       const result = CategoriesLangKeys.find((categorie) => categorie.id === catId);
       if (result) {
         return dict.category[result.categorieKey];

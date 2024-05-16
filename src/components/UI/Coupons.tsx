@@ -71,8 +71,8 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
               <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">
                 {dict.heading.best_coupons}
               </h3>
-              {bestCoupons?.map((coupon: Coupon) => (
-                <Fragment>
+              {bestCoupons?.map((coupon: Coupon, index) => (
+                <Fragment key={index}>
                   <div
                     key={coupon.id}
                     onClick={() => handleClick(coupon)}

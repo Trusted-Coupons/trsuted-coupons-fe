@@ -17,18 +17,6 @@ const Jumbotron: FC<JumbotronProps> = ({ title, subtitle }) => {
         <h2 className="h2 opacity-70 sm:ml-0 text-sm w-[15rem] md:w-[35rem] md:text-xl lg:text-2xl">
           {subtitle}
         </h2>
-        <div className="flex gap-x-2 sm:ml-0 lg:gap-x-4 pt-2">
-          <Link
-            className="bg-primary text-xs font-medium rounded-full px-2 py-1 lg:text-base lg:px-4 lg:py-2"
-            href="/">
-            Find your Coupon
-          </Link>
-          <Link
-            className="bg-white text-xs text-black font-medium rounded-full px-2 py-1 lg:text-base lg:px-4 lg:py-2"
-            href="/stores">
-            Find favorite store
-          </Link>
-        </div>
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ export default async function StorePage(props: any) {
     );
 
     const dict = await getDictionary(props.params.lang);
+
     return (
       <Layout
         alpha={props.params.lang}
@@ -43,7 +44,9 @@ export default async function StorePage(props: any) {
             href={`https://${props.params.id}`}>
             {props.params.id}
           </a>
-          <p className="font-light text-sm lg:text-base">{store.description}</p>
+          <p className="font-light text-sm lg:text-base" style={{ whiteSpace: 'pre-line' }}>
+            {store.description}
+          </p>
         </div>
         <Coupons dict={dict} withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
           <CouponList dict={dict} coupons={coupons} id={store.id} />
