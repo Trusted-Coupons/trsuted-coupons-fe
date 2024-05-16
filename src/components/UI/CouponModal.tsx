@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import useClipboard from '@/hooks/useClipboard';
 import Image from 'next/image';
 import moment from 'moment';
@@ -12,12 +12,40 @@ interface CouponModalProps {
   dict: any;
 }
 
-const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, dict }) => {
+const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, dict, }) => {
   const [copyValue, handleCopy] = useClipboard();
 
   function closeModall() {
     closeModal();
   }
+  const [couponClickedTimes, setCouponClickedTimes] = useState(coupon?.rating || 0);
+
+  const [couponClicked, setCouponClicked] = useState(false)
+
+  const handleClicked = async (couponCode: string) => {
+    await handleCopy(couponCode ? couponCode : '');
+    if (!couponClicked) {
+      try {
+
+        await fetch(`${process.env.API_URL}/coupon/rate`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ coupons_table: coupon?.table_name, coupon_id: coupon?.id }),
+        });
+        setCouponClickedTimes(couponClickedTimes + 1);
+        setCouponClicked(true);
+      } catch (e) {
+        if (coupon) {
+          setCouponClickedTimes(
+            coupon?.rating != couponClickedTimes ? couponClickedTimes - 1 : couponClickedTimes
+          );
+        }
+      }
+    }
+
+  };
 
   return (
     <ReactModal
@@ -60,11 +88,14 @@ const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, di
         <h3 className="text-base lg:text-lg font-medium leading-6">{coupon?.title}</h3>
         <div className="mt-6">
           <p className="text-sm lg:text-base font-light">{coupon?.description}</p>
+          <span className="block text-xs lg:text-sm font-light opacity-60 mt-2">
+            Clicked: {couponClickedTimes}
+          </span>
         </div>
         <div className="mt-6 flex flex-col">
           <span
             className={`p-4 text-center text-sm lg:text-base border-dashed border-1 text-primary ${copyValue && 'bg-gray text-white'} hover:cursor-pointer`}
-            onClick={() => handleCopy(coupon?.code ? coupon?.code : '')}>
+            onClick={() => handleClicked(coupon?.code ? coupon?.code : '')}>
             {coupon?.code}
           </span>
           <span className="pt-3 text-xs lg:text-sm font-light text-center opacity-60">
