@@ -22,9 +22,8 @@ export default async function StoresPage(props: any) {
       <Layout
         alpha={props.params.lang}
         jumbotronSrc={luckyGirlImg}
-        kicker="Saving your money since 2024"
-        title="Alphabetical Store List"
-        subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante."
+        title={dict.heading.hero_heading_stores}
+        subtitle={dict.heading.hero_subheading_stores}
         dict={dict}>
         <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores} dict={dict}>
           <Stores alphabetStores={alphabetStores} dict={dict} />
