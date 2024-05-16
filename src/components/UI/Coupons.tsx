@@ -48,26 +48,27 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
               <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">
                 {dict.heading.best_coupons}
               </h3>
-              {bestCoupons?.map(({ id, title, brand_logo, label, description, code, end_date }) => (
+              {bestCoupons?.map((coupon: Coupon) => (
                 <div
-                  key={id}
+                  key={coupon.id}
                   className="flex items-center gap-x-3 mb-2 border-1 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer"
-                  onClick={() => setIsOpen(id)}>
-                  <Image className="h-5 w-5" src={brand_logo} width={16} height={16} alt={title} />
-                  {id == modalIsOpen && (
+                  onClick={() => setIsOpen(coupon.id)}>
+                  <Image
+                    className="h-5 w-5"
+                    src={coupon.brand_logo}
+                    width={16}
+                    height={16}
+                    alt={'image'}
+                  />
+                  {coupon.id == modalIsOpen && (
                     <CouponModal
-                      title={title}
-                      logo={brand_logo}
-                      label={label}
-                      description={description}
-                      code={code}
-                      valid={end_date}
+                      coupon={coupon}
                       modalIsOpen={modalIsOpen}
                       closeModal={closeModal}
                       dict={dict}
                     />
                   )}
-                  <span className="text-xs lg:text-sm">{title}</span>
+                  <span className="text-xs lg:text-sm">{coupon.title}</span>
                 </div>
               ))}
             </div>
@@ -86,7 +87,7 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
                     src={`https://logo.clearbit.com/${store}?height=15`}
                     height={15}
                     width={40}
-                    alt={store}
+                    alt="image"
                     onClick={() => router.push(`/${params.lang}/stores/${store}?id=${id}`)}
                   />
                 ))}

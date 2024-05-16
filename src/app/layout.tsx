@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Metadata } from 'next';
+import { IsClientCtxProvider } from '@/helpers/isClientCtx';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={inter.className}>
-        {children}
+        <IsClientCtxProvider>{children}</IsClientCtxProvider>
       </body>
     </html>
   );

@@ -1,20 +1,30 @@
 'use client';
-
 import { useState, FC } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Category } from '@/types/api.types';
+import { CategoriesLangKeys } from '@/types/categoriesLangKeys';
 
 interface CategoriesProps {
   alphabetCategories: Record<string, Category[]>;
+  dict: any;
 }
 
 const alphabet = ['All', ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i))];
 
-const Categories: FC<CategoriesProps> = ({ alphabetCategories }) => {
+const Categories: FC<CategoriesProps> = ({ alphabetCategories, dict }) => {
   const router = useRouter();
   const params = useParams<{ lang: string }>();
 
   const [selectedChar, setSelectedChar] = useState('All');
+
+  const returnCategorieKey = (catId: number) => {
+    const result = CategoriesLangKeys.find((categorie) => categorie.id === catId);
+    if (result) {
+      return dict.category[result.categorieKey];
+    } else {
+      return '';
+    }
+  };
 
   const renderList = () => {
     if (selectedChar == 'All') {
@@ -22,12 +32,12 @@ const Categories: FC<CategoriesProps> = ({ alphabetCategories }) => {
         <div key={key} className="flex flex-col">
           <span className="pb-2">{key.toUpperCase()}</span>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 border-solid border-0 border-t border-gray py-2">
-            {stores?.map(({ id, category, coupons }) => (
+            {stores?.map(({ id }) => (
               <div
                 key={id}
                 className="flex items-center bg-light-gray p-4 text-sm gap-x-4 hover:cursor-pointer"
                 onClick={() => router.push(`/${params.lang}/categories/${id}`)}>
-                <span className="mr-auto">{category}</span>
+                <span className="mr-auto">{returnCategorieKey(id)}</span>
               </div>
             ))}
           </div>

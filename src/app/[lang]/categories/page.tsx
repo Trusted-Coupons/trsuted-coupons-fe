@@ -2,7 +2,7 @@ import type { Category, Store } from '@/types/api.types';
 import Layout from '@/components/layout';
 import { Categories, Coupons, PopularCategories, Stores } from '@/components/UI';
 import luckyGirlImg from '../../../../public/images/excited-girl.png';
-import { getDictionary } from '@/app/dictionaries';
+import { getDictionary } from '@/translations/dictionaries';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export default async function CategoriesPage(props: any) {
         dict={dict}
         subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.">
         <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores} dict={dict}>
-          <Categories alphabetCategories={alphabetCategories} />
+          <Categories alphabetCategories={alphabetCategories} dict={dict} />
         </Coupons>
         <PopularCategories categories={popularCategories} dict={dict} />
       </Layout>

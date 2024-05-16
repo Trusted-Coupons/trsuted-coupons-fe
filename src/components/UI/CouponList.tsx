@@ -1,6 +1,5 @@
 'use client';
-
-import { Fragment, useState, FC } from 'react';
+import { Fragment, useState, FC, useEffect } from 'react';
 import { Coupon } from '@/types/api.types';
 
 import CouponCard from './CouponCard';
@@ -14,38 +13,41 @@ interface CouponListProps {
 }
 
 const CouponList: FC<CouponListProps> = ({ coupons, dict, id }) => {
-  const [modalIsOpen, setIsOpen] = useState(-1);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [couponSession, setCouponSession] = useState<Coupon | null>(null);
+  const couponOpen = typeof window !== 'undefined' ? localStorage.getItem('couponOpen') : '';
+  const coupon = typeof window !== 'undefined' ? localStorage.getItem('coupon') || '' : '';
 
   function closeModal() {
-    setIsOpen(-1);
+    localStorage.removeItem('couponOpen');
+    localStorage.removeItem('coupon');
+
+    setIsOpen(false);
   }
+  console.log(coupons[0].id);
+  console.log(modalIsOpen);
 
   const totalPages = Math.ceil(Number(coupons[0]?.total_coupons_count) / 10);
+
+  useEffect(() => {
+    if (coupon && couponOpen) {
+      if (coupon !== '') {
+        setIsOpen(true);
+        setCouponSession(JSON.parse(coupon));
+      }
+    }
+  }, []);
 
   return (
     <div className="flex-1 flex flex-col">
       <div className="w-full flex flex-col flex-1 items-start gap-6">
-        {coupons?.map((coupon, index) => {
+        {coupons?.map((coupon: Coupon, index) => {
           return (
             <Fragment key={index}>
-              <CouponCard
-                title={coupon.title}
-                url={coupon.affiliate_link}
-                description={coupon.description}
-                code={coupon.code}
-                expireDate={coupon.end_date}
-                couponImageUrl={coupon.brand_logo}
-                setIsOpen={() => setIsOpen(coupon.id)}
-                dict={dict}
-              />
-              {coupon.id == modalIsOpen && (
+              <CouponCard coupon={coupon} setIsOpen={() => setIsOpen(true)} dict={dict} />
+              {modalIsOpen && (
                 <CouponModal
-                  title={coupon.title}
-                  logo={coupon.brand_logo}
-                  label={coupon.label}
-                  description={coupon.description}
-                  code={coupon.code}
-                  valid={coupon.end_date}
+                  coupon={couponSession}
                   modalIsOpen={modalIsOpen}
                   closeModal={closeModal}
                   dict={dict}

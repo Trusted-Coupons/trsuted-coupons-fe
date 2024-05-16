@@ -1,7 +1,6 @@
 'use client';
-
 import { useState, FC } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { Store } from '@/types/api.types';
 
 import Image from 'next/image';
@@ -9,12 +8,12 @@ import Link from 'next/link';
 
 interface StoresProps {
   alphabetStores: Record<string, Store[]>;
+  dict: any;
 }
 
 const alphabet = ['All', ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i))];
 
-const Stores: FC<StoresProps> = ({ alphabetStores }) => {
-  const router = useRouter();
+const Stores: FC<StoresProps> = ({ alphabetStores, dict }) => {
   const params = useParams<{ lang: string }>();
 
   const [selectedChar, setSelectedChar] = useState('All');
@@ -34,11 +33,13 @@ const Stores: FC<StoresProps> = ({ alphabetStores }) => {
                   src={`https://logo.clearbit.com/${store}?height=30`}
                   width={30}
                   height={30}
-                  alt={store}
+                  alt="image"
                 />
 
                 <span className="mr-auto">{store}</span>
-                <span className="text-black opacity-60">({coupons.length} coupons)</span>
+                <span className="text-black opacity-60">
+                  ({coupons.length} {dict.label.coupons})
+                </span>
               </Link>
             ))}
           </div>
@@ -60,7 +61,7 @@ const Stores: FC<StoresProps> = ({ alphabetStores }) => {
                   src={`https://logo.clearbit.com/${store}?height=30`}
                   width={30}
                   height={30}
-                  alt={store}
+                  alt={'image'}
                 />
 
                 <span className="mr-auto">{store}</span>

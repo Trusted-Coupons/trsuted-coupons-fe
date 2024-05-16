@@ -1,5 +1,5 @@
 import type { Store } from '@/types/api.types';
-import { getDictionary } from '../dictionaries';
+import { getDictionary } from '../../translations/dictionaries';
 import Layout from '@/components/layout';
 import { PopularStores, Coupons, PopularCategories, CouponList } from '@/components/UI';
 import luckyGirlImg from '../../../public/images/lucky-girl.png';

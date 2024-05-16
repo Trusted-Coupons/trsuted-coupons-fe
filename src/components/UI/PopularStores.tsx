@@ -1,5 +1,4 @@
 'use client';
-
 import type { FC } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import type { Store } from '@/types/api.types';
@@ -7,6 +6,8 @@ import Image from 'next/image';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import useScreenSize from '@/helpers/screenSize';
+import { useIsClient } from '@/helpers/isClientCtx';
 
 interface PopularStoresProps {
   stores: Store[];
@@ -16,11 +17,24 @@ interface PopularStoresProps {
 const PopularStores: FC<PopularStoresProps> = ({ stores, dict }) => {
   const router = useRouter();
   const params = useParams<{ lang: string }>();
+  const isClient = useIsClient();
+  const screenSize = useScreenSize();
+
+  const getSlidesToShow = () => {
+    if (isClient && screenSize.width && typeof screenSize.width === 'number') {
+      if (screenSize.width > 1200) return 5;
+      if (screenSize.width > 768) return 4;
+      if (screenSize.width > 650) return 3;
+      return 2;
+    } else {
+      return 3;
+    }
+  };
 
   const settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 6,
+    slidesToShow: getSlidesToShow(),
     slidesToScroll: 1,
     autoplay: true,
     speed: 2000,
@@ -42,12 +56,12 @@ const PopularStores: FC<PopularStoresProps> = ({ stores, dict }) => {
             <div className="text-center">
               <div className="inline-block">
                 <Image
-                  className="h-16 w-full"
+                  className="xl:h-[100px] md:h-[70px] h-[50px] w-full"
                   height={20}
                   width={45}
                   onClick={() => router.push(`/${params.lang}/stores/${store}?id=${id}`)}
                   src={`https://logo.clearbit.com/${store}?size=800`}
-                  alt={store}
+                  alt="image"
                 />
                 <div>{store}</div>
               </div>

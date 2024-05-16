@@ -4,7 +4,7 @@ import type { Coupon, Store } from '@/types/api.types';
 import Image from 'next/image';
 import Layout from '@/components/layout';
 import { Coupons, PopularCategories, CouponList } from '@/components/UI';
-import { getDictionary } from '@/app/dictionaries';
+import { getDictionary } from '@/translations/dictionaries';
 
 export default async function StorePage(props: any) {
   try {
@@ -34,7 +34,7 @@ export default async function StorePage(props: any) {
             height={200}
             width={200}
             src={`https://logo.clearbit.com/${props.params.id}?height=200`}
-            alt={props.params.id}
+            alt={'image'}
           />
           <h3 className="h3 text-xl lg:text-2xl font-semibold">{props.params.id}</h3>
           <a

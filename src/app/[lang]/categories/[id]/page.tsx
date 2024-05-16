@@ -3,7 +3,8 @@ import type { Store } from '@/types/api.types';
 import Layout from '@/components/layout';
 import { Coupons, PopularCategories, CouponList } from '@/components/UI';
 import luckyGirlImg from '../../../../../public/images/excited-girl.png';
-import { getDictionary } from '@/app/dictionaries';
+import { getDictionary } from '@/translations/dictionaries';
+import { CategoriesLangKeys } from '@/types/categoriesLangKeys';
 
 export default async function CategoryPage(props: any) {
   try {
@@ -12,12 +13,23 @@ export default async function CategoryPage(props: any) {
       props.params.id
     );
     const dict = await getDictionary(props.params.lang);
+
+    const returnCategorieKey = (catId: number) => {
+      console.log(catId);
+      const result = CategoriesLangKeys.find((categorie) => categorie.id === catId);
+      if (result) {
+        return dict.category[result.categorieKey];
+      } else {
+        return '';
+      }
+    };
+
     return (
       <Layout
         alpha={props.params.lang}
         jumbotronSrc={luckyGirlImg}
         kicker="Category"
-        title={<span className="text-primary">Beauty</span>}
+        title={<span className="text-primary">{returnCategorieKey(Number(props.params.id))}</span>}
         dict={dict}
         subtitle="Get your Coupon today and save yourself up to 50% of your money">
         <Coupons dict={dict} withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>

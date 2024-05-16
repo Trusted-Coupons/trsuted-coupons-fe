@@ -28,7 +28,7 @@ const PopularCategories: FC<PopularCategoriesProps> = ({ categories, dict }) => 
   return (
     <div className="flex flex-col gap-4 border-1 border-gray rounded-3xl p-6 lg:p-8">
       <h3 className="text-lg pb-6 text-primary font-medium md:text-xl lg:text-2xl">
-        Popular Categories
+        {dict.heading.popular_categories}
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 text-xs lg:text-sm gap-4">
         {categories?.map(({ id }) => {
