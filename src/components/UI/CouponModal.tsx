@@ -12,7 +12,7 @@ interface CouponModalProps {
   dict: any;
 }
 
-const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, dict, }) => {
+const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, dict }) => {
   const [copyValue, handleCopy] = useClipboard();
 
   function closeModall() {
@@ -20,19 +20,18 @@ const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, di
   }
   const [couponClickedTimes, setCouponClickedTimes] = useState(coupon?.rating || 0);
 
-  const [couponClicked, setCouponClicked] = useState(false)
+  const [couponClicked, setCouponClicked] = useState(false);
 
   const handleClicked = async (couponCode: string) => {
     await handleCopy(couponCode ? couponCode : '');
     if (!couponClicked) {
       try {
-
         await fetch(`${process.env.API_URL}/coupon/rate`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ coupons_table: coupon?.table_name, coupon_id: coupon?.id }),
+          body: JSON.stringify({ coupons_table: coupon?.table_name, coupon_id: coupon?.id })
         });
         setCouponClickedTimes(couponClickedTimes + 1);
         setCouponClicked(true);
@@ -44,7 +43,6 @@ const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, di
         }
       }
     }
-
   };
 
   return (
@@ -115,70 +113,3 @@ const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, di
 };
 
 export default CouponModal;
-
-{
-  /* {coupon ? (
-        <Transition appear show={modalIsOpen} as={Fragment}>
-          <Dialog as="div" className="relative z-10" onClose={closeModal}>
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0">
-              <div className="fixed inset-0 " />
-            </Transition.Child>
-            <div className="fixed inset-0 overflow-y-auto">
-              <div className="flex min-h-full items-center justify-center p-4 text-center">
-                <Transition.Child
-                  as={Fragment}
-                  enter="ease-out duration-300"
-                  enterFrom="opacity-0 scale-95"
-                  enterTo="opacity-100 scale-100"
-                  leave="ease-in duration-200"
-                  leaveFrom="opacity-100 scale-100"
-                  leaveTo="opacity-0 scale-95">
-                  <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-10 text-left align-middle shadow-md transition-all">
-                    <div className="flex items-center justify-between gap-x-3 px-3 pb-8">
-                      <Image
-                        className="w-20"
-                        width={100}
-                        height={50}
-                        src={coupon.brand_logo}
-                        alt={'image'}
-                      />
-                      <span className="text-xs lg:text-sm uppercase font-semibold">
-                        {coupon.label}
-                      </span>
-                    </div>
-                    <Dialog.Title as="h3" className="text-base lg:text-lg font-medium leading-6">
-                      {coupon.title}
-                    </Dialog.Title>
-                    <div className="mt-6">
-                      <p className="text-sm lg:text-base font-light">{coupon.description}</p>
-                    </div>
-                    <div className="mt-6 flex flex-col">
-                      <span
-                        className={`p-4 text-center text-sm lg:text-base border-dashed border-1 text-primary ${copyValue && 'bg-gray text-white'} hover:cursor-pointer`}
-                        onClick={() => handleCopy(coupon.code)}>
-                        {coupon.code}
-                      </span>
-                      <span className="pt-3 text-xs lg:text-sm font-light text-center opacity-60">
-                        {dict.modal.click_to_copy}
-                      </span>
-                    </div>
-                    <div className="mt-8 flex justify-center">
-                      <span className="text-xs lg:text-sm font-light opacity-60">
-                        {dict.modal.valid_until} {moment(coupon.end_date).format('DD MMM YYYY')}
-                      </span>
-                    </div>
-                  </Dialog.Panel>
-                </Transition.Child>
-              </div>
-            </div>
-          </Dialog>
-        </Transition>
-      ) : null} */
-}
