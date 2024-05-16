@@ -52,10 +52,12 @@ const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, di
             className="w-20"
             width={100}
             height={50}
-            src={coupon?.brand_logo ? coupon?.brand_logo : ''}
+            src={`https://logo.clearbit.com/${coupon?.store}?height=15`}
             alt={'image'}
           />
-          <span className="text-xs lg:text-sm uppercase font-semibold">{coupon?.label}</span>
+          <span className="text-primary text-xs lg:text-sm uppercase font-semibold">
+            {coupon?.label}
+          </span>
         </div>
         <h3 className="text-base lg:text-lg font-medium leading-6">{coupon?.title}</h3>
         <div className="mt-6">
