@@ -20,15 +20,9 @@ export default async function StorePage(props: any) {
     return (
       <Layout
         alpha={props.params.lang}
-        kicker="Saving your money since 2024"
         dict={dict}
-        title={
-          <>
-            <span className="text-primary">20.000+</span> Coupons{' '}
-            <span className="text-primary">1.000+</span> Stores
-          </>
-        }
-        subtitle="Get your Coupon today and save yourself up to 50% of your money">
+        title={dict.heading.hero_heading_stores}
+        subtitle={dict.heading.hero_subheading_stores}>
         <div className="flex flex-col items-center justify-center border-1 border-gray rounded-3xl py-8 px-8 lg:px-36 gap-y-3">
           <Image
             className="h-36 w-36 rounded-3xl mb-3"

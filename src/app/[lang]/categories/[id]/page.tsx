@@ -27,10 +27,9 @@ export default async function CategoryPage(props: any) {
       <Layout
         alpha={props.params.lang}
         jumbotronSrc={luckyGirlImg}
-        kicker="Category"
         title={<span className="text-primary">{returnCategorieKey(Number(props.params.id))}</span>}
         dict={dict}
-        subtitle="Get your Coupon today and save yourself up to 50% of your money">
+        subtitle={dict.heading.hero_subheading_categories}>
         <Coupons dict={dict} withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
           <CouponList dict={dict} coupons={coupons} />
         </Coupons>

@@ -20,10 +20,9 @@ export default async function CategoriesPage(props: any) {
       <Layout
         alpha={props.params.lang}
         jumbotronSrc={luckyGirlImg}
-        kicker="Saving your money since 2024"
-        title="Alphabetical Category List"
+        title={dict.heading.hero_heading_categories}
         dict={dict}
-        subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.">
+        subtitle={dict.heading.hero_subheading_categories}>
         <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores} dict={dict}>
           <Categories alphabetCategories={alphabetCategories} dict={dict} />
         </Coupons>

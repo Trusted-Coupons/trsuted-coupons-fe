@@ -6,7 +6,6 @@ import Footer from '@/components/UI/Footer';
 
 interface LayouProps {
   alpha: string;
-  kicker?: string;
   title: ReactNode;
   subtitle: string;
   jumbotronSrc?: StaticImageData;
@@ -16,7 +15,6 @@ interface LayouProps {
 const Layout: FC<PropsWithChildren<LayouProps>> = ({
   children,
   alpha,
-  kicker,
   title,
   subtitle,
   jumbotronSrc,
