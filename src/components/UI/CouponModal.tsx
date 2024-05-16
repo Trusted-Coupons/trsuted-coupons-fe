@@ -89,7 +89,7 @@ const CouponModal: FC<CouponModalProps> = ({ coupon, modalIsOpen, closeModal, di
         <div className="mt-6">
           <p className="text-sm lg:text-base font-light">{coupon?.description}</p>
           <span className="block text-xs lg:text-sm font-light opacity-60 mt-2">
-            Clicked: {couponClickedTimes}
+            {dict.label.copied}: {couponClickedTimes}
           </span>
         </div>
         <div className="mt-6 flex flex-col">
