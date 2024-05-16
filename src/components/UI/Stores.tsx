@@ -22,7 +22,7 @@ const Stores: FC<StoresProps> = ({ alphabetStores, dict }) => {
     if (selectedChar == 'All') {
       return Object.entries(alphabetStores)?.map(([key, stores]) => (
         <div key={key} className="flex flex-col">
-          <span className="pb-2">{key.toUpperCase()}</span>
+          <span className="pb-2">{dict.alphabet[key.toUpperCase()]}</span>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 border-solid border-0 border-t border-gray py-2">
             {stores?.map(({ id, store, coupons }) => (
               <Link

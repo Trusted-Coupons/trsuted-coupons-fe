@@ -4,6 +4,7 @@ import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Coupon } from '@/types/api.types';
+import logo1Img from '../../../public/images/logo-1.png';
 
 type CouponCardProps = {
   coupon: Coupon;
@@ -25,12 +26,19 @@ const CouponCard = ({ coupon, setIsOpen, dict }: CouponCardProps) => {
 
   return (
     <div className="flex w-full gap-5 border-1 border-gray rounded-3xl p-6 lg:p-8">
-      <div className="hidden lg:block p-5">
-        <Image src={coupon.brand_logo} width={200} height={40} alt="coupon card" />
+      <div className="flex flex-col justify-center items-center basis-1/5 p-5">
+        <Image
+          className="h-16 w-16"
+          src={`https://logo.clearbit.com/${coupon.store}?height=15`}
+          width={46}
+          height={46}
+          alt={'image'}
+        />
+        <label className="text-primary text-center">{coupon.label}</label>
       </div>
-      <div className="flex flex-col gap-y-5">
-        <h3 className="text-base lg:text-2xl font-medium">{coupon.title}</h3>
-        <p className="font-light text-sm lg:text-base">{coupon.description}</p>
+      <div className=" basis-4/5 flex flex-col gap-y-5">
+        <h3 className="text-[20px] font-medium">{coupon.title}</h3>
+        <p className="font-light text-[16px]">{coupon.description}</p>
         <div className="flex flex-col gap-y-4 lg:flex-row gap-x-3 items-center">
           <button
             className="h-fit pr-4 flex items-center font-medium bg-gray-300 rounded-full text-nowrap"

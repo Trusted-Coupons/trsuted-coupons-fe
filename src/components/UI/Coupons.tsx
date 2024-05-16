@@ -78,10 +78,10 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
                     onClick={() => handleClick(coupon)}
                     className="flex items-center gap-x-3 mb-2 border-1 z-0 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer">
                     <Image
-                      className="h-5 w-5"
-                      src={coupon.brand_logo}
-                      width={16}
-                      height={16}
+                      className="h-8 w-8"
+                      src={`https://logo.clearbit.com/${coupon.store}?height=15`}
+                      width={26}
+                      height={26}
                       alt={'image'}
                     />
                     <span className="text-xs lg:text-sm">{coupon.title}</span>
