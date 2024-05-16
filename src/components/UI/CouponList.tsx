@@ -24,8 +24,6 @@ const CouponList: FC<CouponListProps> = ({ coupons, dict, id }) => {
 
     setIsOpen(false);
   }
-  console.log(coupons[0].id);
-  console.log(modalIsOpen);
 
   const totalPages = Math.ceil(Number(coupons[0]?.total_coupons_count) / 10);
 

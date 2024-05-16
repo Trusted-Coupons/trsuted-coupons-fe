@@ -1,5 +1,5 @@
 'use client';
-import { useState, FC, PropsWithChildren } from 'react';
+import { useState, FC, PropsWithChildren, useEffect, Fragment } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import type { Store, Coupon } from '@/types/api.types';
 import Image from 'next/image';
@@ -22,11 +22,34 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
   const router = useRouter();
   const params = useParams<{ lang: string }>();
 
-  const [modalIsOpen, setIsOpen] = useState(-1);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [couponSession, setCouponSession] = useState<Coupon | null>(null);
+  const couponOpen = typeof window !== 'undefined' ? localStorage.getItem('bestCouponOpen') : '';
+  const coupon = typeof window !== 'undefined' ? localStorage.getItem('bestCoupon') || '' : '';
+
+  const handleClick = (coupon: Coupon) => {
+    setIsOpen(true);
+    window.open(window.location.href, '_blank');
+    localStorage.setItem('bestCoupon', JSON.stringify(coupon));
+    localStorage.setItem('bestCouponOpen', JSON.stringify(true));
+    router.push(coupon.url);
+    window.open(coupon.url, '_blank', 'noreferrer');
+  };
 
   function closeModal() {
-    setIsOpen(-1);
+    localStorage.removeItem('bestCouponOpen');
+    localStorage.removeItem('bestCoupon');
+    setIsOpen(false);
   }
+
+  useEffect(() => {
+    if (coupon && couponOpen) {
+      if (coupon !== '') {
+        setIsOpen(true);
+        setCouponSession(JSON.parse(coupon));
+      }
+    }
+  }, []);
 
   return (
     <div className={`flex flex-col ${withoutHeader && 'pt-0 lg:pt-12'}`}>
@@ -49,27 +72,29 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
                 {dict.heading.best_coupons}
               </h3>
               {bestCoupons?.map((coupon: Coupon) => (
-                <div
-                  key={coupon.id}
-                  className="flex items-center gap-x-3 mb-2 border-1 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer"
-                  onClick={() => setIsOpen(coupon.id)}>
-                  <Image
-                    className="h-5 w-5"
-                    src={coupon.brand_logo}
-                    width={16}
-                    height={16}
-                    alt={'image'}
-                  />
-                  {coupon.id == modalIsOpen && (
+                <Fragment>
+                  <div
+                    key={coupon.id}
+                    onClick={() => handleClick(coupon)}
+                    className="flex items-center gap-x-3 mb-2 border-1 z-0 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer">
+                    <Image
+                      className="h-5 w-5"
+                      src={coupon.brand_logo}
+                      width={16}
+                      height={16}
+                      alt={'image'}
+                    />
+                    <span className="text-xs lg:text-sm">{coupon.title}</span>
+                  </div>
+                  {modalIsOpen && (
                     <CouponModal
-                      coupon={coupon}
+                      coupon={couponSession}
                       modalIsOpen={modalIsOpen}
                       closeModal={closeModal}
                       dict={dict}
                     />
                   )}
-                  <span className="text-xs lg:text-sm">{coupon.title}</span>
-                </div>
+                </Fragment>
               ))}
             </div>
           ) : (
