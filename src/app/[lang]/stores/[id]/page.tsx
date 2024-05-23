@@ -90,7 +90,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
   return {
     title: store?.storeMetadata[0]?.metadata_title,
     description: store?.storeMetadata[0]?.metadata_title,
-    keywords: store?.keywords,
+    keywords: store?.keywordsArr.join(', '),
     icons: store?.icon
   };
 }

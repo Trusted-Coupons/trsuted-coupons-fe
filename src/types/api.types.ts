@@ -56,7 +56,7 @@ export interface Store {
   mainCategory: string;
   altTopics: string[];
   altCategories: string[];
-  keywords: string[];
+  keywordsArr: string[];
   totalCountries: number;
   countries: string[];
   country_language: string[];
