@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const localeRegex = /^[a-z]{2}-[A-Z]{2}$/; // Regular expression pattern to match locales in the format 'xx-XX'
 const defaultLocale = 'en-US'; // Default locale
-const excludeFiles = ['/googlecedb3442f7706abd.html', '/']; // List of files to exclude from locale redirection
+const excludeFiles = ['/googlecedb3442f7706abd.html', '/lang.html']; // List of files to exclude from locale redirection
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
