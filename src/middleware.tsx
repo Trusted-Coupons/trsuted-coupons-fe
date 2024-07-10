@@ -7,7 +7,13 @@ const excludeFiles = ['/googlecedb3442f7706abd.html', '/lang.html']; // List of 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Check if the pathname should be excluded
+  // Check if the request is for the root path
+  if (pathname === '/') {
+    // Redirect to /lang.html
+    return NextResponse.redirect('/lang.html');
+  }
+
+  // Check if the pathname should be excluded from locale redirection
   if (excludeFiles.includes(pathname)) {
     return NextResponse.next();
   }
