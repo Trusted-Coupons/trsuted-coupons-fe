@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const localeRegex = /^[a-z]{2}-[A-Z]{2}$/;
 const defaultLocale = 'en-US';
-const excludeFiles = ['/googlecedb3442f7706abd.html', '/lang.html'];
+const excludeFiles = ['/googlecedb3442f7706abd.html', '/lang.html', '/sitemap.xml'];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
