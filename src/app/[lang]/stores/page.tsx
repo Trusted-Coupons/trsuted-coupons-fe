@@ -26,9 +26,7 @@ export default async function StoresPage(props: any) {
         kicker="Saving your money since 2024"
         title="Alphabetical Store List"
         subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.">
-        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
-          <Stores alphabetStores={alphabetStores} />
-        </Coupons>
+        <Stores alphabetStores={alphabetStores} />
         <PopularCategories categories={popularCategories} />
       </Layout>
     );

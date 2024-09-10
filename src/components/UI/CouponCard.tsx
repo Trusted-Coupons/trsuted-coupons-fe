@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
-
 import Image from 'next/image';
 
 type CouponCardProps = {
@@ -23,13 +22,19 @@ const CouponCard = ({
   expireDate,
   setIsOpen
 }: CouponCardProps) => {
+  const [showDetails, setShowDetails] = useState(false);
+
   const handleClick = () => {
     setIsOpen(true);
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
+  const toggleDetails = () => {
+    setShowDetails(!showDetails);
+  };
+
   return (
-    <div className="flex w-full gap-5 border-1 border-gray rounded-3xl p-6 lg:p-8">
+    <div className="flex max-w-[800px] w-full gap-5 border-1 border-gray rounded-3xl p-6 lg:p-8">
       <div className="hidden lg:block p-5">
         <Image
           className="max-w-[5rem]"
@@ -41,7 +46,6 @@ const CouponCard = ({
       </div>
       <div className="flex flex-col gap-y-5">
         <h3 className="text-base lg:text-2xl font-medium">{title}</h3>
-        <p className="font-light text-sm lg:text-base">{description}</p>
         <div className="flex flex-col gap-y-4 lg:flex-row gap-x-3 items-center">
           <button
             className="h-fit pr-4 flex items-center font-medium bg-gray-300 rounded-full text-nowrap"
@@ -55,6 +59,12 @@ const CouponCard = ({
             Expire: {moment(expireDate).format('DD/MM/YYYY')}
           </span>
         </div>
+        <button
+          className="text-primary font-medium text-sm lg:text-base mt-4"
+          onClick={toggleDetails}>
+          {showDetails ? 'Hide Details' : 'Show Details'}
+        </button>
+        {showDetails && <p className="font-light text-sm lg:text-base">{description}</p>}
       </div>
     </div>
   );

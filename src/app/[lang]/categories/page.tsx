@@ -24,9 +24,7 @@ export default async function CategoriesPage(props: any) {
         kicker="Saving your money since 2024"
         title="Alphabetical Category List"
         subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.">
-        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
-          <Categories alphabetCategories={alphabetCategories} />
-        </Coupons>
+        <Categories alphabetCategories={alphabetCategories} />
         <PopularCategories categories={popularCategories} />
       </Layout>
     );

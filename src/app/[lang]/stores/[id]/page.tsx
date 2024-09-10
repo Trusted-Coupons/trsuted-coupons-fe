@@ -7,7 +7,7 @@ import { Coupons, PopularCategories, CouponList } from '@/components/UI';
 
 export default async function StorePage(props: any) {
   try {
-    const { store, bestCoupons, bestStores, popularCategories } = await getServerSideProps(
+    const { store, popularCategories } = await getServerSideProps(
       props.params.lang,
       props.params.id
     );
@@ -38,11 +38,9 @@ export default async function StorePage(props: any) {
             href={`https://${store.store}`}>
             {store.store}
           </a>
-          <p className="font-light text-sm lg:text-base">{store.description}</p>
         </div>
-        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
-          <CouponList coupons={store.coupons} />
-        </Coupons>
+        <CouponList coupons={store.coupons} />
+        <p className="font-light text-sm lg:text-base">{store.description}</p>
         <PopularCategories categories={popularCategories} />
       </Layout>
     );

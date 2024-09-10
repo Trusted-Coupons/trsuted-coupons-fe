@@ -2,6 +2,7 @@
 
 import { Fragment, useState, FC } from 'react';
 import type { Coupon } from '@/types/api.types';
+import moment from 'moment';
 
 import CouponCard from './CouponCard';
 import CouponModal from './CouponModal';
@@ -17,10 +18,10 @@ const CouponList: FC<CouponListProps> = ({ coupons }) => {
   function closeModal() {
     setIsOpen(-1);
   }
-
+  console.log(coupons);
   return (
     <div className="flex-1 flex flex-col">
-      <div className="w-full flex flex-col flex-1 items-start gap-6">
+      <div className="w-full flex flex-col flex-1 items-center gap-6">
         {coupons.map((coupon, index) => {
           return (
             <Fragment key={index}>

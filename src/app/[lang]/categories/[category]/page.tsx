@@ -18,9 +18,8 @@ export default async function CategoryPage(props: any) {
         kicker="Category"
         title={<span className="text-primary">{category.category}</span>}
         subtitle="Get your Coupon today and save yourself up to 50% of your money">
-        <Coupons withoutHeader={true} bestCoupons={bestCoupons} bestStores={bestStores}>
-          <CouponList coupons={coupons} />
-        </Coupons>
+        <CouponList coupons={coupons} />
+
         <PopularCategories categories={popularCategories} />
       </Layout>
     );
