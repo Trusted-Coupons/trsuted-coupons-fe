@@ -61,4 +61,5 @@ export interface Store {
   country_language: string[];
   coupons: Coupon[];
   storeMetadata: StoreMetadata[];
+  storeAppearInCountries: string[];
 }

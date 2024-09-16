@@ -7,6 +7,7 @@ import Jumbotron from './Jumbotron';
 import PopularCategories from './PopularCategories';
 import PopularStores from './PopularStores';
 import Stores from './Stores';
+import StoreCard from './StoreCard';
 
 export {
   Categories,
@@ -17,5 +18,6 @@ export {
   Jumbotron,
   PopularCategories,
   PopularStores,
-  Stores
+  Stores,
+  StoreCard
 };
