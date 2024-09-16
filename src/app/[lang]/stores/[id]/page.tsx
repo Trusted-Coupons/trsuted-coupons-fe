@@ -65,6 +65,7 @@ export default async function StorePage(props: any) {
                 storeName={store.store}
                 description={store.description}
                 countryCodes={store.storeAppearInCountries}
+                storeId={ props.params.id}
               />
             </div>
           </div>
