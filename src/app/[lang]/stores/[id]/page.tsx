@@ -3,7 +3,7 @@ import type { Category, Store } from '@/types/api.types';
 
 import Image from 'next/image';
 import Layout from '@/components/layout';
-import { Coupons, PopularCategories, CouponList } from '@/components/UI';
+import { Coupons, PopularCategories, CouponList, StoreCard } from '@/components/UI';
 
 export default async function StorePage(props: any) {
   try {
@@ -22,26 +22,54 @@ export default async function StorePage(props: any) {
             <span className="text-primary">1.000+</span> Stores
           </>
         }
-        subtitle="Get your Coupon today and save yourself up to 50% of your money">
-        <div className="flex flex-col items-center justify-center border-1 border-gray rounded-3xl py-8 px-8 lg:px-36 gap-y-3">
-          <Image
-            className="h-36 w-36 rounded-3xl mb-3"
-            height={200}
-            width={200}
-            src={`https://logo.clearbit.com/${store.store}?height=200`}
-            alt={store.store}
-          />
-          <h3 className="h3 text-xl lg:text-2xl font-semibold">{store.store}</h3>
-          <a
-            target="_blank"
-            className="font-light text-primary underline text-xs lg:text-sm"
-            href={`https://${store.store}`}>
-            {store.store}
-          </a>
+        subtitle="Get your Coupon today and save yourself up to 50% of your money"
+      >
+        {/* Container for two-column layout */}
+        <div className="container mx-auto py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Left Section: Coupon List and Popular Categories */}
+            <div className="lg:col-span-2 space-y-6">
+              <div className="flex flex-col items-center justify-center border border-gray-200 rounded-3xl py-8 px-8 lg:px-36 gap-y-3">
+                {/* Store Info Section */}
+                <Image
+                  className="h-36 w-36 rounded-3xl mb-3"
+                  height={200}
+                  width={200}
+                  src={`https://logo.clearbit.com/${store.store}?height=200`}
+                  alt={store.store}
+                />
+                <h3 className="h3 text-xl lg:text-2xl font-semibold">{store.store}</h3>
+                <a
+                  target="_blank"
+                  className="font-light text-primary underline text-xs lg:text-sm"
+                  href={`https://${store.store}`}
+                >
+                  {store.store}
+                </a>
+              </div>
+
+              {/* Coupon List */}
+              <CouponList coupons={store.coupons} />
+
+              {/* Store Description */}
+              <p className="font-light text-sm lg:text-base">{store.description}</p>
+
+              {/* Popular Categories */}
+              <PopularCategories categories={popularCategories} />
+            </div>
+
+            {/* Right Section: Store Card */}
+            <div className="lg:col-span-1">
+              <StoreCard
+                logoUrl={`https://logo.clearbit.com/${store.store}?height=200`}
+                storeName={store.store}
+                description={store.description}
+                countryCodes={store.storeAppearInCountries}
+                storeId={ props.params.id}
+              />
+            </div>
+          </div>
         </div>
-        <CouponList coupons={store.coupons} />
-        <p className="font-light text-sm lg:text-base">{store.description}</p>
-        <PopularCategories categories={popularCategories} />
       </Layout>
     );
   } catch (error) {
