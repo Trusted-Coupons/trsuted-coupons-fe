@@ -8,19 +8,15 @@ import Image from 'next/image';
 import CouponModal from './CouponModal';
 
 import tagImg from '../../../public/images/tag.png';
+import PopularCategories from './PopularCategories';
 
 interface CouponsProps {
-  bestCoupons: Coupon[];
-  bestStores: Store[];
+  bestCoupons?: Coupon[];
+  bestStores?: Store[];
   withoutHeader?: boolean;
 }
 
-const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
-  children,
-  bestCoupons,
-  bestStores,
-  withoutHeader
-}) => {
+const Coupons: FC<PropsWithChildren<CouponsProps>> = ({ children }) => {
   const router = useRouter();
   const params = useParams<{ lang: string }>();
 
@@ -31,69 +27,28 @@ const Coupons: FC<PropsWithChildren<CouponsProps>> = ({
   }
 
   return (
-    <div className={`flex flex-col ${withoutHeader && 'pt-0 lg:pt-12'}`}>
-      {!withoutHeader && (
-        <div className="flex flex-col">
-          <div className="flex flex-col gap-y-1 mb-6 text-black max-w-7xl py-4 lg:mb-0 lg:py-12 lg:gap-y-3">
-            <h4 className="uppercase text-xs font-medium md:text-base">
-              Saving your money since 2024
-            </h4>
-            <h2 className="font-medium text-lg md:text-4xl">
-              Popular <span className="text-primary">coupons</span>
-            </h2>
-            <h3 className="opacity-70 text-sm font-light md:text-lg">
-              Look for your favorite store and save yourself some money
-            </h3>
-          </div>
-        </div>
-      )}
-      <div className="flex flex-col md:flex-row gap-x-6 gap-y-6">
-        {children}
+    <div className={`flex flex-col`}>
+      <div className="flex flex-col md:flex-row gap-x-10 gap-y-10 justify-center">
+        <div className="flex flex-col gap-10">{children}</div>
         <div className="w-full flex-col md:flex md:max-w-[20rem] lg:max-w-[25rem] lg:gap-y-6">
           <div className="border-1 mb-8 border-gray rounded-3xl p-6 lg:p-8 lg:mb-0">
-            <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Best Coupons</h3>
-            {bestCoupons.map(
-              ({ id, table_name, store, rating, title, label, description, code, end_date }) => (
-                <div
-                  key={id}
-                  className="flex items-center gap-x-3 mb-2 border-1 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer"
-                  onClick={() => setIsOpen(id)}>
-                  <Image className="h-5 w-5" src={tagImg} width={17} height={14} alt={title} />
-                  {id == modalIsOpen && (
-                    <CouponModal
-                      title={title}
-                      clicked={rating}
-                      couponTable={table_name}
-                      label={label}
-                      store={store}
-                      description={description}
-                      code={code}
-                      valid={end_date}
-                      modalIsOpen={modalIsOpen}
-                      closeModal={closeModal}
-                      id={id}
-                    />
-                  )}
-                  <span className="text-xs lg:text-sm">{title}</span>
-                </div>
-              )
-            )}
+            {/* sidebar */}
+            <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">
+              Welcome to trusted.<span className="text-primary">coupons</span>
+            </h3>
+            <p>
+              We provide you with a huge selection of vouchers and voucher codes for the most
+              popular online shops across 94 countries!
+              <br />
+              <br />
+              Savings portal trusted.coupons – save money with vouchers when shopping smart
+              Trusted.coupons is a leading global savings portal. By using the free vouchers and
+              voucher codes on our website, clever shoppers can save money on every purchase in
+              numerous online shops worldwide. There are many good reasons to use savings portals in
+              general and trusted.coupons in particular.
+            </p>
           </div>
-          <div className="border-1 border-gray rounded-3xl p-6 lg:p-8 mb-8 lg:mb-0">
-            <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Best Stores</h3>
-            <div className="grid grid-cols-5 gap-3 mb-1 border-1 border-gray rounded-3xl overflow-hidden py-2 px-4 hover:cursor-pointer">
-              {bestStores.map(({ id, store, icon }) => (
-                <Image
-                  key={id}
-                  src={`https://logo.clearbit.com/${store}?height=15`}
-                  height={15}
-                  width={40}
-                  alt={store}
-                  onClick={() => router.push(`/${params.lang}/stores/${id}`)}
-                />
-              ))}
-            </div>
-          </div>
+          {/* <PopularCategories /> */}
           <div className="flex flex-col border-1 border-gray rounded-3xl p-6 lg:p-8">
             <h3 className="text-lg pb-6 font-medium md:text-xl lg:text-2xl">Email Newsletter</h3>
             <p className="font-light text-xs lg:text-sm opacity-60 mb-6">

@@ -23,7 +23,11 @@ const Layout: FC<PropsWithChildren<LayouProps>> = ({
   return (
     <>
       <Header alpha={alpha} jumbotronSrc={jumbotronSrc} />
-      <div className="flex flex-col gap-y-10 max-w-[1280px] mr-auto ml-auto p-4">{children}</div>
+      <div
+        className="flex flex-col gap-y-20 justify-center items-center px-10
+      ">
+        {children}
+      </div>
       <Footer alpha={alpha} />
     </>
   );

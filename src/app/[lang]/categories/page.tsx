@@ -25,7 +25,7 @@ export default async function CategoriesPage(props: any) {
         title="Alphabetical Category List"
         subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.">
         <Categories alphabetCategories={alphabetCategories} />
-        <PopularCategories categories={popularCategories} />
+        {/* <PopularCategories categories={popularCategories} /> */}
       </Layout>
     );
   } catch (error) {

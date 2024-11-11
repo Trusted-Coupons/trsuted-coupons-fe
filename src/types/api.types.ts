@@ -57,8 +57,10 @@ export interface Store {
   altCategories: string[];
   keywords: string[];
   totalCountries: number;
+  ourCategories: any;
   countries: string[];
   country_language: string[];
   coupons: Coupon[];
   storeMetadata: StoreMetadata[];
+  storeAppearInCountries: string[];
 }

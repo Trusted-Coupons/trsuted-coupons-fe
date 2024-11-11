@@ -27,7 +27,7 @@ export default async function StoresPage(props: any) {
         title="Alphabetical Store List"
         subtitle="In dignissim feugiat gravida. Proin feugiat quam sed gravida fringilla. Proin quis mauris ut magna fringilla vulputate quis non ante.">
         <Stores alphabetStores={alphabetStores} />
-        <PopularCategories categories={popularCategories} />
+        {/* <PopularCategories categories={popularCategories} /> */}
       </Layout>
     );
   } catch (error) {
@@ -37,7 +37,7 @@ export default async function StoresPage(props: any) {
 
 async function getServerSideProps(lang: string) {
   const requests = [
-    '/stores-all',
+    '/stores-all-alphabetical',
     '/coupons?page=1&perPage=5',
     '/stores?page=1&perPage=15',
     '/categories'

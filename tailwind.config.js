@@ -17,7 +17,8 @@ module.exports = {
         1: '1px'
       },
       colors: {
-        primary: '#FF5C00',
+        primary: '#2B41A1',
+        'primary-orange': '#f39151',
         secondary: '#292929',
         tertiary: '#222222',
         gray: '#DEDEDE',

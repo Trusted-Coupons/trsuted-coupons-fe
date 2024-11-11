@@ -77,13 +77,13 @@ const CouponModal: FC<CouponModalProps> = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-10 text-left align-middle shadow-xl transition-all">
-                <div className="flex items-center justify-between gap-x-3 pb-8">
+                <div className="flex flex-col items-center justify-between gap-x-3 pb-8">
                   <Image
-                    className="w-8"
-                    width={100}
-                    height={50}
-                    src={`https://logo.clearbit.com/${store}?height=15`}
-                    alt={title}
+                    className="max-w-[5rem]"
+                    src={`https://logo.clearbit.com/${store}?height=250`}
+                    width={250}
+                    height={250}
+                    alt={store}
                   />
                   <span className="text-xs lg:text-sm uppercase font-semibold">{label}</span>
                 </div>
