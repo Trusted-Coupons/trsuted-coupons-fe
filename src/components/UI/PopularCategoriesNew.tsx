@@ -14,10 +14,19 @@ interface PopularCategoriesProps {
 
 const PopularCategoriesNew: FC<PopularCategoriesProps> = ({ categories }) => {
   const params = useParams<{ lang: string }>();
-  // Replace single quotes with double quotes for valid JSON
-  const jsonString = categories.replace(/'/g, '"');
-  // Parse the JSON string into an array
-  const arrayData = JSON.parse(jsonString);
+
+  let arrayData: string[] = [];
+  try {
+    if (categories) {
+      const jsonString = String(categories).replace(/'/g, '"');
+      const parsed = JSON.parse(jsonString);
+      arrayData = Array.isArray(parsed) ? parsed : [];
+    }
+  } catch {
+    arrayData = [];
+  }
+
+  if (arrayData.length === 0) return null;
 
   return (
     <div className="flex flex-col gap-2 border-1 border-gray rounded-3xl p-2 lg:p-4">

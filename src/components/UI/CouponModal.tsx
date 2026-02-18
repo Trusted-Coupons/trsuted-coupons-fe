@@ -38,7 +38,7 @@ const CouponModal: FC<CouponModalProps> = ({
   const handleClicked = async () => {
     try {
       await handleCopy(code);
-      await fetch(`${process.env.API_URL}/coupon/rate`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/coupon/rate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ const CouponModal: FC<CouponModalProps> = ({
       setCouponClickedTimes(couponClickedTimes + 1);
     } catch (e) {
       setCouponClickedTimes(
-        clicked != couponClickedTimes ? couponClickedTimes - 1 : couponClickedTimes
+        clicked !== couponClickedTimes ? couponClickedTimes - 1 : couponClickedTimes
       );
     }
   };

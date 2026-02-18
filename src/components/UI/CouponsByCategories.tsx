@@ -14,18 +14,20 @@ const CouponsByCategories: FC<StoresListProps> = ({ storesList, category }) => {
   // Limit to a maximum of 6 stores
   const limitedStoresList = storesList.slice(0, 6);
 
-  // Find the highest-rated coupon for each store
-  const storesWithHighestRatedCoupons = limitedStoresList.map((store) => {
-    const highestRatedCoupon = store.coupons.reduce((highest, current) => {
-      return current.rating > (highest?.rating || 0) ? current : highest;
-    }, store.coupons[0]);
+  // Find the highest-rated coupon for each store (skip stores with no coupons)
+  const storesWithHighestRatedCoupons = limitedStoresList
+    .filter((store) => Array.isArray(store.coupons) && store.coupons.length > 0)
+    .map((store) => {
+      const highestRatedCoupon = store.coupons.reduce((highest, current) => {
+        return current.rating > (highest?.rating || 0) ? current : highest;
+      }, store.coupons[0]);
 
-    return {
-      store: store.store,
-      id: store.id,
-      highestRatedCoupon
-    };
-  });
+      return {
+        store: store.store,
+        id: store.id,
+        highestRatedCoupon
+      };
+    });
 
   // Sort stores by the highest-rated coupon in descending order
   const sortedStores = storesWithHighestRatedCoupons.sort((a, b) => {
@@ -48,7 +50,7 @@ const CouponsByCategories: FC<StoresListProps> = ({ storesList, category }) => {
       {/* Grid for stores */}
       <div className="grid grid-cols-2 gap-4 justify-center">
         {sortedStores.map(({ id, highestRatedCoupon }) => (
-          <CouponSmallCard highestRatedCoupon={highestRatedCoupon} id={id} />
+          <CouponSmallCard key={id} highestRatedCoupon={highestRatedCoupon} id={id} />
         ))}
       </div>
     </div>
