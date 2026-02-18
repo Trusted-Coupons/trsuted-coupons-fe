@@ -54,7 +54,7 @@ const CouponList: FC<CouponListProps> = ({ coupons, store, description }) => {
             />
           </div>
           <div className="flex flex-col gap-1 items-start justify-center max-w-[800px] w-full lg:p-4 rounded-2xl p-4">
-            <h1 className="font-bold text-[30px]">Benetton Coupons</h1>
+            <h1 className="font-bold text-[30px]">{store} Coupons</h1>
             <a
               href={`https://www.${store}`}
               target="_blank"

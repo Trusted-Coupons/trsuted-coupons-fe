@@ -42,12 +42,12 @@ async function getServerSideProps(lang: string) {
   ];
 
   const apis = await Promise.all(
-    requests.map((url) =>
-      fetch(`${process.env.API_URL}/${lang}${url}`, {
-        cache: 'no-cache'
-      })
-    )
-  ).then(async (res) => Promise.all(res.map(async (data) => await data.json())));
+    requests.map(async (url) => {
+      const res = await fetch(`${process.env.API_URL}/${lang}${url}`, { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);
+      return res.json();
+    })
+  );
 
   return {
     alphabetCategories: apis[0] as Record<string, Category[]>,

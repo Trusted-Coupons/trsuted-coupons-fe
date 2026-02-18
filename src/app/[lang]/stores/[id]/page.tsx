@@ -84,9 +84,7 @@ async function getServerSideProps(lang: string, storeId: string) {
       category: arrayData[0]
     };
   } catch (error) {
-    return {
-      props: { error: 'Failed to fetch data' }
-    };
+    throw error;
   }
 }
 
@@ -121,12 +119,17 @@ async function fetchStoreData(lang: string, storeId: string) {
 }
 
 export async function generateMetadata(props: any): Promise<Metadata> {
-  const { storeData } = await fetchStoreData(props.params.lang, props.params.id);
+  try {
+    const { storeData } = await fetchStoreData(props.params.lang, props.params.id);
+    const meta = storeData?.storeMetadata?.[0];
 
-  return {
-    title: storeData.storeMetadata[0].metadata_title,
-    description: storeData.storeMetadata[0].metadata_title,
-    keywords: storeData.keywords,
-    icons: storeData.icon
-  };
+    return {
+      title: meta?.metadata_title ?? storeData?.store ?? 'Trusted Coupons',
+      description: meta?.metadata_description ?? storeData?.description ?? '',
+      keywords: storeData?.keywords ?? '',
+      icons: storeData?.icon ?? ''
+    };
+  } catch {
+    return { title: 'Trusted Coupons' };
+  }
 }

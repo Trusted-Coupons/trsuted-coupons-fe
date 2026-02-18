@@ -5,6 +5,7 @@ import './globals.css';
 
 import { Header, Jumbotron } from '@/components/UI';
 import Footer from '../components/UI/Footer';
+import ErrorBoundary from '@/helpers/errorBoundary';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={inter.className}>
-        {children}
+        <ErrorBoundary>{children}</ErrorBoundary>
       </body>
     </html>
   );

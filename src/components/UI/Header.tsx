@@ -10,6 +10,7 @@ import { Dialog, Popover } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import Logo from '../../../public/images/logo.png';
+import SearchBar from './SearchBar';
 
 interface HeaderProps {
   alpha: string;
@@ -67,8 +68,9 @@ const Header: FC<PropsWithChildren<HeaderProps>> = ({ children, alpha, jumbotron
             ))}
           </Popover.Group>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <SearchBar lang={alpha} />
             {/* Search Bar */}
-            <form onSubmit={handleSearchSubmit} className="flex items-center">
+            {/* <form onSubmit={handleSearchSubmit} className="flex items-center">
               <input
                 type="text"
                 value={searchTerm}
@@ -79,7 +81,7 @@ const Header: FC<PropsWithChildren<HeaderProps>> = ({ children, alpha, jumbotron
               <button type="submit" className="ml-2 rounded-md bg-[#f39151] px-4 py-2 text-white">
                 Search
               </button>
-            </form>
+            </form> */}
           </div>
         </nav>
       </div>
